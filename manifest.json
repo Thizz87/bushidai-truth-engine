@@ -1,0 +1,44 @@
+{
+  "bundle": "bushidai-truth-engine-v0.7.0",
+  "version": "0.7.0",
+  "created_by": "Thijs Smits (TS87)",
+  "created_at": "2025-04-02T14:19:00Z",
+  "description": "Bushidai Truth Simulator with OpenCog Hyperon MeTTa integration + Genesis Node system. Non-weaponization licensed for educational and ethical use only.",
+  "files": [
+    {
+      "path": "bushidai_truth_v0.7.0.py",
+      "sha256": "<FILL_ME_SHA256>",
+      "size_bytes": "<FILL_ME_BYTES>"
+    },
+    {
+      "path": "README.md",
+      "sha256": "<FILL_ME_SHA256>",
+      "size_bytes": "<FILL_ME_BYTES>"
+    },
+    {
+      "path": "GENESIS.md",
+      "sha256": "<FILL_ME_SHA256>",
+      "size_bytes": "<FILL_ME_BYTES>"
+    },
+    {
+      "path": "LICENSE_BUSHIDAI_NON_WEAPONIZATION.txt",
+      "sha256": "<FILL_ME_SHA256>",
+      "size_bytes": "<FILL_ME_BYTES>"
+    },
+    {
+      "path": "VERIFY_INSTRUCTIONS.txt",
+      "sha256": "<FILL_ME_SHA256>",
+      "size_bytes": "<FILL_ME_BYTES>"
+    },
+    {
+      "path": "BML_v1_TS87.md",
+      "sha256": "<FILL_ME_SHA256>",
+      "size_bytes": "<FILL_ME_BYTES>"
+    },
+    {
+      "path": "genesis-archive/How_does_SYSTEMATIC_FRAMING_work_on_SYSTEM_LEVELS_v1_TS87.pdf",
+      "sha256": "<FILL_ME_SHA256>",
+      "size_bytes": "<FILL_ME_BYTES>"
+    }
+  ]
+}

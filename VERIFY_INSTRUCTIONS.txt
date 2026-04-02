@@ -1,0 +1,29 @@
+﻿Verification (quick)
+====================
+Public key file: xxxx_pub.pem
+manifest: manifest.json
+Signature file: manifest.sig
+Expected manifest SHA256: <BUNDLE_HASH>
+
+
+Steps:
+1) Canonicalize manifest:
+   jq -S . manifest.json > manifest.json
+
+
+2) Compute hash and compare to <BUNDLE_HASH>:
+   sha256sum manifest_canonical.json
+
+
+3) Verify signature:
+   openssl pkeyutl -verify -in manifest.json -sigfile manifest.sig -pubin -inkey xxxx_pub.pem
+
+
+Per-file checks (anyone can run):
+   sha256sum README_GENESIS.md
+   sha256sum LICENSE_BUSHIDAI_NON_WEAPONIZATION.txt
+   sha256sum HN-2026-0001.json
+   sha256sum HN-2026-0001.csv
+   sha256sum ER-2026-0001.json
+   sha256sum ER-2026-0001.csv
+Compare outputs with values in manifest_canonical.json.

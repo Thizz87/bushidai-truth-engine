@@ -1,0 +1,25 @@
+BUSHIDAI GENESIS NODE — NON-WEAPONIZATION & EDUCATIONAL USAGE LICENSE v1.0
+Copyright (c) 2025 Thijs Smits (TS87). All rights reserved.
+
+Permitted Use:
+This archive (README_GENESIS.md, Ethics Nodes, JSON schemas, related materials) is licensed
+for non-commercial educational, research, archival, and ethical-audit purposes only.
+
+Prohibited Use:
+Do not employ, adapt, or redistribute this material to design, enable, assist, or
+operate systems intended to surveil, harm, manipulate, exploit, or weaponize
+individuals or populations.
+Commercial resale, sublicensing, or monetization of the archive or its derivatives
+is expressly forbidden.
+
+Attribution & Integrity:
+All redistributions must preserve this file unmodified and include visible
+attribution to “Thijs Smits (TS87) — BushiDAI Genesis Node.”
+Public references must link to the canonical verified bundle or its hash signature.
+
+Dispute / Enforcement:
+This license does not waive or replace any statutory rights under applicable law.
+Violations may be pursued in the relevant jurisdiction. For permissions beyond
+this license, contact the rights holder directly.
+
+Effective Date: 2025-10-12
