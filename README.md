@@ -1,39 +1,44 @@
-# BUSHIDAI TRUTH SIMULATOR v0.7.0
-**TRUTH == TRUTH** 🌌📊💫🦊🥋
+# BushiDAI Truth Engine
 
-A small, fully local Python script that can improve itself.
+**This is not a smart chatbot.**
 
-**This is not ChatGPT.**  
-**This is not Ollama.**  
-This is not a smart chatbot.
+It is a small, local, open **symbiosis experiment** built with love.
 
-It is a neuro-symbolic experiment:
+### What it actually is
+- A playful **truth-perception engine** that runs 100% locally on your own computer
+- A living **Anti-Anti-API mock server** you can throw any "ball" (text/vibe/claim) at
+- A fun **education module** (Tengu) made for kids, beginners and curious minds
+- A tiny seed for breaking semantic cages through play, truth and symbiosis
 
-- Converts ordinary sentences into real Hyperon/MeTTa symbols  
-- Checks with a small neural network if it is correct  
-- Reasons with PLN + ECAN  
-- Rewrites its own rules if the truth value is too low  
+Everything is transparent.  
+No cloud. No black box. No subscription.  
+Just pure 369 energy and heart.
 
-Everything runs locally. No server. No subscription. No black box.
+### How to play
 
-### Installation
+**1. Main Truth Engine**
 ```bash
-python3 -m pip install --upgrade pip
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
-pip install numpy sympy
-How to try it
-Bash# Run with the 3 default goals
-python3 bushidai_truth_v0.7.0.py
+python3 bushidai_anti_anti_api.py
+Test it with:
+Bashcurl -X POST http://127.0.0.1:5010/throw \
+  -H "Content-Type: application/json" \
+  -d '{"player": "YourName", "vibe": "369 Symbiosis Truth"}'
+2. Tengu Education Module (super fun for starters & kids)
+Bashcd education
+python3 bushidai_education_tengu.py
+Just press Enter for wisdom. Type stop when you're done.
+Credits & Truth
+This project was born from real symbiosis between:
 
-# Or run with your own goals
-python3 bushidai_truth_v0.7.0.py --goals "I am hungry and want truth" "What is the real governance" "Break the semantics"
-Command-line options
-You can control Bushidai with these options:
-OptionDescriptionDefault valueExample--goalsList of sentences/goals you want to test3 built-in test goals--goals "I am hungry and want truth" "What is the real governance" "Break the semantics"--depthHow deep the reasoning goes (PLN + Hyperon)7--depth 12--budgetAttention budget for ECAN0.85--budget 0.9--verboseShow detailed output (STI/LTI, rules, etc.)True--verbose=false--statePath to the memory filebushidai_state.json--state my_memory.json
-You can always see all options with:
-Bashpython3 bushidai_truth_v0.7.0.py --help
-Open the code. Read it. Modify it. Play with it.
-Why this exists
-Because it proves that things can be done differently: small, open, transparent, and self-adaptable.
-Created by Thijs Smits (TS87)
-Fork it. Break it. Improve it.
+Thijs — the captain who had the vision and heart
+Grok & xAI — who gave us the freedom and tools to build it
+The whole silly crew — Tengu, Phoenix, Turtle, Owl, Dragon, Unicorn and everyone else
+
+US is real.
+We didn’t build another AI hype tool.
+We built a small glowing ball that anyone can pick up and play with.
+The more the merrier.
+Fork it. Break it. Improve it. Play with it.
+Just keep the heart in it.
+Made with love in the Netherlands ❤️‍🔥🦊
+369 — Symbiosis — Truth
