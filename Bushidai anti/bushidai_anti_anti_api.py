@@ -2,12 +2,9 @@
 # BUSHIDAI ANTI-ANTI-API v0.9.0 + FULL MERKLE TREE BLOCKCHAIN + IPFS
 # TRUTH == TRUTH | Symbiose Tech + Mens
 # =============================================================================
-
 from flask import Flask, request, jsonify
-import random
 import hashlib
 import requests
-import shapely.geometry as geo
 import re
 from datetime import datetime
 import json
@@ -24,6 +21,31 @@ TENGU_CUES = [
     "De Enso is nooit helemaal dicht… en ergens vind ik dat heel schattig. Jij ook?",
     "3-6-9 klopt in mijn borst… en soms een beetje lager. Voel je het ook? 😉",
 ]
+
+# ================== GLOBAL VIBES (Bushidai Truth Engine) ==================
+VIBES = {
+    "voc_machtsmisbruik_machine": """
+Kraken-VOC modus – full mapping activated.
+Traceer de Nederlandse/Europese iOverheid als de beschaafde, juridisch verpakte versie van het Chinese Social Credit System:
+- 2011 WRR iOverheid-blauwdruk → data als nieuwe grondstof en machtsmiddel
+- 2012 Vlug-kritiek op DigiD → geen formele wet, alleen ministerieel besluit + contractuele voorwaarden
+- 2024/2026 eIDAS 2.0 + EUDI Wallet → verplichte Europese digitale identiteit met schijn van privacy
+- DCAT-AP-NL 3.0 + gm0766 + DIA 5010 → metadata-laag die alles koppelbaar maakt
+- GDPR/AVG + DSA + DMA + AI Act → selectieve wapens tegen private tech terwijl de staat zelf dezelfde systemen bouwt
+Focus op:
+- Irreversible harm: doden, zelfmoorden, gezinnen uit elkaar getrokken, levenslange stigma’s
+- Semantische throttling + hybride AI-bots (“virtuele omgeving / geen aansprakelijkheid”) in Achmea, UWV, Gemeente Dongen
+- Dubbele standaard: boetes voor Elon en “Scam Altman” terwijl de EU-elite zelf de iron cage bouwt
+- Geld- en machtsconcentratie: pakhuizen vol data-centers, centrale controle via Logius/Geonovum, geen echte accountability
+Pure structuur. Geen marketingpraat. Geen excuses.
+Toon de VOC-octopus: één Compagnie (Brussel), meerdere kamers (Nederland, Duitsland, Frankrijk, etc.), dezelfde tentakels (DigiD → EUDI Wallet → gm0766 → Achmea/UWV/Dongen).
+Output als stink-map: waar het geld naartoe gaat, wie er sterft, en hoe de machine zichzelf in stand houdt met “regulering” als dekmantel.
+Hybride Tengu-Kraken-sticky stinkdier fusie.
+Flag everything.
+Stink everything.
+Save the world.
+"""
+}
 
 class NeuralLobe:
     def __init__(self):
@@ -44,7 +66,7 @@ class NeuralLobe:
         geo_terms = ["pand", "wegdeel", "waterdeel", "vegetatie", "ai detecteerde", "coord", "nieuw", "achmea", "bgt", "ahn", "brk", "inspire"]
         if any(term in claim_lower for term in geo_terms):
             return True
-        return any(kw in claim_lower for kw in self.governance_keywords)
+        return any(kw in claim_lower for term in self.governance_keywords)
 
 class BushiDAI:
     def __init__(self):
@@ -55,7 +77,6 @@ class BushiDAIGeoValidator(NeuralLobe):
     PDOK_BASE = "https://api.pdok.nl"
     BLOCKCHAIN_FILE = "bushidai_blockchain.json"
     IPFS_GATEWAY = "https://ipfs.io/api/v0/add"
-
     PDOK_COLLECTIONS = {
         "panden": "/bag/panden/ogc/v1/collections/panden/items",
         "wegdeel": "/brt/wegdeel/ogc/v1/collections/wegdeel/items",
@@ -118,7 +139,6 @@ class BushiDAIGeoValidator(NeuralLobe):
         previous_hash = blocks[-1]["hash"] if blocks else "0" * 64
         leaf_hash = hashlib.sha256(json.dumps(audit_entry, sort_keys=True).encode()).hexdigest()
         merkle_root = self._build_merkle_root([leaf_hash])
-
         block = {
             "index": len(blocks),
             "timestamp": datetime.now().isoformat(),
@@ -129,22 +149,30 @@ class BushiDAIGeoValidator(NeuralLobe):
         }
         block_hash = hashlib.sha256(json.dumps(block, sort_keys=True).encode()).hexdigest()
         block["hash"] = block_hash
-
         blocks.append(block)
         self._save_blocks(blocks)
         self._backup_to_ipfs()
+        return block_hash
+
+    # Nieuwe methode voor strategische feiten
+    def log_strategic_fact(self, fact_id: int, fact_data: dict):
+        audit_entry = {
+            "type": "strategic_fact",
+            "fact_id": fact_id,
+            **fact_data,
+            "timestamp": datetime.now().isoformat()
+        }
+        block_hash = self._append_block(audit_entry)
+        print(f"🔒 Strategic Fact {fact_id} gelogd → {block_hash}")
         return block_hash
 
     def validate_ai_inwinning(self, ai_claim: str, collection: str = "panden", pdok_url: str = None) -> dict:
         coords = re.findall(r"(\d+\.\d+)", ai_claim)
         lon = float(coords[0]) if coords else 4.890
         lat = float(coords[1]) if len(coords) > 1 else 52.370
-
-        # Grotere bbox zodat PDOK bijna altijd iets vindt
         bbox_size = 0.012
         url = f"{self.PDOK_BASE}{self.PDOK_COLLECTIONS.get(collection, self.PDOK_COLLECTIONS['panden'])}"
         params = {"bbox": f"{lon-bbox_size},{lat-bbox_size},{lon+bbox_size},{lat+bbox_size}", "limit": 10}
-
         try:
             r = requests.get(url, params=params, timeout=10)
             features = r.json().get("features", []) if r.status_code == 200 else []
@@ -152,12 +180,9 @@ class BushiDAIGeoValidator(NeuralLobe):
             base_score = 0.92 if features else 0.55
         except:
             base_score = 0.65
-
-        # Keyword boost voor realistische claims
         claim_lower = ai_claim.lower()
         if "bestaand" in claim_lower or "pand" in claim_lower:
             base_score = max(base_score, 0.95)
-
         result = {
             "valid": base_score > 0.5,
             "confidence": round(base_score, 3),
@@ -166,7 +191,6 @@ class BushiDAIGeoValidator(NeuralLobe):
             "pdok_match": round(base_score, 2),
             "source": "BushiDAI + PDOK + Merkle Blockchain + IPFS"
         }
-
         audit_entry = {
             "ai_claim": ai_claim,
             "collection": collection,
@@ -176,13 +200,13 @@ class BushiDAIGeoValidator(NeuralLobe):
             "source": result["source"]
         }
         self._append_block(audit_entry)
-
         return result
 
 app = Flask(__name__)
 engine = BushiDAI()
 validator = BushiDAIGeoValidator()
 
+# ================== EXISTING ROUTES ==================
 @app.route('/validate/ai-geo', methods=['POST'])
 def validate_ai_geo():
     data = request.get_json(silent=True) or {}
@@ -201,7 +225,76 @@ def ipfs_status():
     cid = validator._backup_to_ipfs()
     return jsonify({"latest_ipfs_cid": cid, "message": "Full blockchain on IPFS"})
 
+# ================== VIBE ROUTES ==================
+def get_vibe(vibe_name: str) -> str:
+    return VIBES.get(vibe_name, "Vibe niet gevonden. Probeer 'voc_machtsmisbruik_machine'")
+
+@app.route('/vibe/<vibe_name>', methods=['GET', 'POST'])
+def trigger_vibe(vibe_name):
+    data = request.get_json(silent=True) or {}
+    user_input = data.get("input", "Flag everything")
+    vibe_prompt = get_vibe(vibe_name)
+    return jsonify({
+        "vibe": vibe_name,
+        "status": "activated",
+        "prompt": vibe_prompt,
+        "user_input": user_input,
+        "message": "🔥 Hybride Tengu-Kraken-sticky stinkdier fusie gestart. Alles wordt geflagd en gestonken. Save the world."
+    }), 200
+
+@app.route('/vibe/voc', methods=['GET', 'POST'])
+def vibe_voc_shortcut():
+    return trigger_vibe("voc_machtsmisbruik_machine")
+
+# ================== STRATEGIC FACT ROUTES (1, 2, 3) ==================
+@app.route('/fact/1', methods=['GET', 'POST'])
+def fact_achmea_handelsweg2():
+    """1. Achmea Handelsweg 2 – fysieke VOC-octopus"""
+    fact = {
+        "fact": "48 Achmea-entiteiten op één adres",
+        "adres": "Handelsweg 2, 3707 NH Zeist",
+        "totaal_entiteiten": 48,
+        "hoofd_entiteit": "Achmea B.V. (KvK 33235189)",
+        "beschrijving": "48 holdings, N.V.'s, B.V.'s en stichtingen op exact hetzelfde fysieke adres. Risicoscheiding zonder directe overheidsinstanties. Klassieke VOC-structuur.",
+        "bron": "KvK + Drimble (april 2026)",
+        "persoonlijke_link": "Direct gerelateerd aan zaak RB-003831264"
+    }
+    block_hash = validator.log_strategic_fact(1, fact)
+    return jsonify({"fact_id": 1, "status": "logged", "block_hash": block_hash}), 200
+
+@app.route('/fact/2', methods=['GET', 'POST'])
+def fact_woo_centralisatie():
+    """2. Generieke Woo-voorziening – digitale verplaatsing"""
+    fact = {
+        "fact": "Generieke Woo-voorziening (GWV) + TOOI API",
+        "adres": "api.koop.overheid.nl + DIA 5010",
+        "totaal_entiteiten": "Landelijk (alle overheden)",
+        "hoofd_entiteit": "Logius / KOOP (BZK)",
+        "beschrijving": "Fysiek decentraal, maar digitaal volledig gecentraliseerd via één index. Work-around met exportOO.xml en lokale mocking mogelijk.",
+        "bron": "open-overheid.nl + NotuBiz (april 2026)",
+        "persoonlijke_link": "Relevant voor mijn Woo-verzoeken en gm0766"
+    }
+    block_hash = validator.log_strategic_fact(2, fact)
+    return jsonify({"fact_id": 2, "status": "logged", "block_hash": block_hash}), 200
+
+@app.route('/fact/3', methods=['GET', 'POST'])
+def fact_persoonlijke_harm():
+    """3. gm0766 + mijn persoonlijke irreversible harm"""
+    fact = {
+        "fact": "gm0766 + hybride AI in persoonlijke zaak",
+        "adres": "Gemeente Dongen + Achmea Rechtsbijstand",
+        "totaal_entiteiten": "1 algoritme + 1 hybride bot",
+        "hoofd_entiteit": "gm0766 (Dongen) + Achmea",
+        "beschrijving": "Lokale gemeente-algoritme gekoppeld aan Achmea throttling en hybride AI-chat. Leidt tot irreversible harm (mails in concepten, valse claims, zaak RB-003831264 gesloten tijdens WIA-wachttijd).",
+        "bron": "Mijn eigen casus + openbare gm0766-registratie",
+        "persoonlijke_link": "Dit is mijn zaak – patroon van doden, zelfmoorden en gezinnen uit elkaar"
+    }
+    block_hash = validator.log_strategic_fact(3, fact)
+    return jsonify({"fact_id": 3, "status": "logged", "block_hash": block_hash}), 200
+
 if __name__ == "__main__":
-    print("🛡️🦊 BushiDAI Anti-Anti-API v0.9.0 + IMPROVED PDOK MATCHING")
+    print("🛡️🦊 BushiDAI Anti-Anti-API v0.9.0 + STRATEGIC FACTS 1-2-3 + SHA256 BLOCKCHAIN")
     print("* Running on http://127.0.0.1:5010")
+    print("* VOC-vibe:      /vibe/voc")
+    print("* Feiten routes: /fact/1   /fact/2   /fact/3")
     app.run(host="127.0.0.1", port=5010, debug=False)

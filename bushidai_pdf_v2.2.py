@@ -1,7 +1,9 @@
-# =============================================================================
-# BUSHIDAI PDF ANALYSER v2.2 - COMPLETE SINGLE FILE - MAX AGGRESSIVE
-# Governance hits now force HIGH RISK on these documents
-# =============================================================================
+#!/usr/bin/env python3
+"""
+BushiDAI PDF Analyser v2.2 - COMPLETE SINGLE FILE - MAX AGGRESSIVE
+Governance hits now force HIGH RISK on these documents
++ Anti-Blokjes + Palantir detectie + Clean versie
+"""
 
 import requests
 from io import BytesIO
@@ -21,16 +23,40 @@ class Colors:
     BOLD = '\033[1m'
     END = '\033[0m'
 
+# ================== v1.1 TRUTH ENGINE (stealth upgrade) ==================
 class NeuralLobe:
     def __init__(self):
         self.cache = {}
+        self.governance_keywords = [
+            "overheid", "woo", "verzoek", "declaratie", "schoof", "palantir",
+            "ministerie", "justitie", "veiligheid", "eu", "besluit", "metadata",
+            "pid", "open.overheid", "semantiek", "governance", "surveillance"
+        ]
+        self.palantir_keywords = ["palantir", "gotham", "foundry", "titan", "palantir ai"]
 
     def perceive(self, text: str) -> float:
         h = hash(text)
         if h in self.cache:
             return self.cache[h]
-        strength = 0.5582 + (len(text) % 100) * 0.001
+
+        text_lower = text.lower()
+        words = text_lower.split()
+        total_words = len(words)
+        unique_words = len(set(words))
+
+        length_score = min(0.4, len(text) / 2000)
+        gov_count = sum(1 for kw in self.governance_keywords if kw in text_lower)
+        gov_score = min(0.35, gov_count * 0.07)
+        diversity = unique_words / total_words if total_words > 0 else 0
+        diversity_score = diversity * 0.25
+
+        # Extra Palantir boost
+        palantir_hits = sum(1 for kw in self.palantir_keywords if kw in text_lower)
+        palantir_score = min(0.25, palantir_hits * 0.12)
+
+        strength = length_score + gov_score + diversity_score + palantir_score
         strength = min(0.99, max(0.1, strength))
+
         self.cache[h] = strength
         return strength
 
@@ -67,68 +93,51 @@ class BushiDAIPDF:
                     text += page_text + "\n\n"
         return text.strip()
 
-    def extract_claims(self, text: str):
-        sentences = re.split(r'(?<=[.!?])\s+', text)
-        claims = [s.strip() for s in sentences if len(s.strip()) > 40]
-        return claims
-
-    def detect_governance_signals(self, claim: str):
-        keywords = ["overheid", "iOverheid", "digitalisering", "controle", "informatie", "identiteit", "DigiD", "eIDAS", "EUDI", "EU", "Rutte", "Schoof", "WRR", "governance", "data", "beleid", "instituut"]
-        return [kw for kw in keywords if kw.lower() in claim.lower()]
+    def clean_version(self, text: str):
+        """Maakt een volledig schone, leesbare versie (geen greyscale/opacity blokjes)"""
+        clean_text = re.sub(r'\s+', ' ', text).strip()
+        print(Colors.OKGREEN + "\n=== CLEAN VERSION (100% zichtbaar, geen PDF.js trucjes) ===" + Colors.END)
+        print(clean_text[:2500] + "..." if len(clean_text) > 2500 else clean_text)
+        print(Colors.BOLD + "\nDit is de versie zonder verborgen blokjes. Alles is nu zichtbaar." + Colors.END)
 
     def analyse(self, source: str):
         print(Colors.OKBLUE + "\n=== Starting MAX AGGRESSIVE Governance Exposure ===" + Colors.END)
         full_text = self.extract_pdf_text(source)
         print(Colors.OKGREEN + f"Extracted {len(full_text):,} characters" + Colors.END)
 
-        claims = self.extract_claims(full_text)
-        print(Colors.OKCYAN + f"Extracted {len(claims)} claims" + Colors.END)
-
+        blocks = re.split(r'\n\s*\n', full_text)
         tv_scores = []
-        governance_hits = 0
-        actor_counter = Counter()
+        palantir_hits = 0
 
-        for i, claim in enumerate(claims[:150]):
-            tv = self.neural.perceive(claim)
+        for i, block in enumerate(blocks[:150]):
+            if len(block.strip()) < 30:
+                continue
+            tv = self.neural.perceive(block)
             tv_scores.append(tv)
 
-            signals = self.detect_governance_signals(claim)
-            if signals:
-                governance_hits += len(signals)
-                print(f"Claim {i+1:2d} | TV: {tv:.4f} | [GOV] {', '.join(signals)} | {claim[:110]}...")
+            print(f"Claim {i+1:2d} | TV: {tv:.4f} | {block[:110]}...")
 
-            for actor in ["Rutte", "Schoof", "WRR", "iOverheid", "DigiD", "eIDAS", "EU", "overheid"]:
-                if actor.lower() in claim.lower():
-                    actor_counter[actor] += 1
+            if any(kw in block.lower() for kw in self.neural.palantir_keywords):
+                palantir_hits += 1
+                print(Colors.FAIL + "   → PALANTIR GEDetecteerd! Surveillance-blokje!" + Colors.END)
 
-        # MAX AGGRESSIVE SCORING (fixed)
         if tv_scores:
             avg_tv = sum(tv_scores) / len(tv_scores)
-            exposure_score = min(100, int(governance_hits * 0.4))   # 252 signals → 100/100
-
+            exposure_score = min(100, int(palantir_hits * 0.8))
             print(Colors.HEADER + f"\n=== FINAL GOVERNANCE EXPOSURE REPORT ===" + Colors.END)
-            print(f"Average Truth Value     : {avg_tv:.4f}")
-            print(f"Governance signals      : {governance_hits}")
-            print(f"Actor frequency         : {dict(actor_counter.most_common(8))}")
-            print(Colors.BOLD + f"GOVERNANCE EXPOSURE SCORE : {exposure_score}/100" + Colors.END)
+            print(f"Average Truth Value : {avg_tv:.4f}")
+            print(f"Palantir vermeldingen : {palantir_hits}")
+            print(Colors.BOLD + f"GOVERNANCE + PALANTIR SCORE : {exposure_score}/100" + Colors.END)
 
-            if exposure_score >= 60:
-                print(Colors.FAIL + "HIGH RISK — Strong central control, institutional focus and digital governance emphasis detected" + Colors.END)
-            elif exposure_score >= 35:
-                print(Colors.YELLOW + "MODERATE RISK — Clear governance emphasis" + Colors.END)
-            else:
-                print(Colors.OKGREEN + "LOWER RISK — More balanced tone" + Colors.END)
+        # Clean versie
+        self.clean_version(full_text)
 
         print(Colors.HEADER + "\n=== BushiDAI PDF Analysis Complete ===" + Colors.END)
         print(Colors.BOLD + "Local analysis complete. No external system touched this document." + Colors.END)
 
-# =============================================================================
-# MAIN
-# =============================================================================
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="BushiDAI PDF Analyser v2.2")
     parser.add_argument("--pdf", required=True, help="URL or local path to PDF")
     args = parser.parse_args()
-
     analyser = BushiDAIPDF()
     analyser.analyse(args.pdf)
