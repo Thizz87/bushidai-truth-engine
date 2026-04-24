@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  bushidai:
+    build: .
+    ports:
+      - "5010:5010"
+    volumes:
+      - ./pdok_cache:/app/pdok_cache
+      - ./bushidai_blockchain.json:/app/bushidai_blockchain.json
+    restart: unless-stopped

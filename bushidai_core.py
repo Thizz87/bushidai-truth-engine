@@ -7,9 +7,40 @@ import numpy as np
 import argparse
 import os
 import re
+import yaml
+from pathlib import Path
 
 print("BUSHIDAI TRUTH SIMULATOR v0.8.2 - Optimized + Beautiful Output")
 print("TRUTH == TRUTH\n")
+
+# =============================================================================
+# REFINED YAML LOADING (bottom 2 option 1)
+# =============================================================================
+def load_bushidai_config():
+    """Load the full bushiDAI YAML configuration with robust error handling"""
+    config_path = Path(__file__).parent / "bushidai_config.yaml"
+    try:
+        with open(config_path, "r", encoding="utf-8") as f:
+            config = yaml.safe_load(f)
+        print("✅ bushidai YAML config loaded successfully")
+        return config
+    except FileNotFoundError:
+        print("⚠️  bushidai_config.yaml not found — using empty config")
+        return {}
+    except Exception as e:
+        print(f"⚠️  Error loading YAML: {e} — using empty config")
+        return {}
+
+# Load config once at startup
+config = load_bushidai_config()
+bushidai = config.get("bushidai", {})
+# Make key sections easily accessible
+joy_spectrum = bushidai.get("joy_spectrum", [])
+creative_framework = bushidai.get("creative_frameworks", [{}])[0] if bushidai.get("creative_frameworks") else {}
+stackable_objects = bushidai.get("stackable_objects", [])
+
+print(f"   Joy spectrum: {len(joy_spectrum)} frequencies loaded")
+print(f"   Creative framework: {creative_framework.get('name', 'None')}\n")
 
 # =============================================================================
 # COLORS FOR NICE TERMINAL OUTPUT
@@ -25,7 +56,7 @@ class Colors:
     END = '\033[0m'
 
 # =============================================================================
-# OPTIMIZED CLASSES
+# OPTIMIZED CLASSES (your original code untouched)
 # =============================================================================
 class NeuralLobe:
     def __init__(self):

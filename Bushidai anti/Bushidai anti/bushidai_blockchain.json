@@ -1,0 +1,16 @@
+[
+  {
+    "index": 0,
+    "timestamp": "2026-04-17T13:13:42.229245",
+    "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "data": {
+      "ai_claim": "AI detecteerde UWV pand in Amsterdam",
+      "collection": "panden",
+      "valid": true,
+      "confidence": 0.92,
+      "source": "BushiDAI Anti Digital Twin v0.10.0"
+    },
+    "leaf_hash": "bfe150d0cf679c93cd8d4769d8bb7b2bef8397ea2ed4b30beb3bcaa25f0ada7e",
+    "hash": "3b21bfe6d956ba716ff00caf7e1581f847befc6c8fe65287d563442490968ed2"
+  }
+]
