@@ -1,6 +1,6 @@
-bushidai:
+bushiDAI:
   version: "1.0"
-  name: "bushidai - Good Bass API"
+  name: "BushiDAI - Good Bass API"
   core_vibe: "warm group hug, zero shame, all-inclusive primal joy, symbiosis, truth-seeking, fun, no taboos"
   motto: "All is normal. All is beautiful. All is human."
   
@@ -23,52 +23,70 @@ bushidai:
     - "Small, open, fundamental"
 
   joy_spectrum:
-    - name: "romantic / story-driven"
-      description: "Deep, heart-connected storytelling that turns truth-seeking into beautiful human narratives. Slow-burn connection, cinematic vibes, emotional bass."
-      core_energy: "Warm intimacy + meaning-making"
-      usage: "Stack when you want to turn technical truth or chaos into soul-level art and long-lasting emotional resonance."
-
-    - name: "passionate / sensual"
-      description: "Fiery, embodied, skin-to-skin energy. Sensual language, charged tension, raw desire expressed with love and zero shame."
-      core_energy: "Heart + body on fire"
-      usage: "Perfect for passionate debates, spicy remixes, or when the hugging api’s needs that electric sensual pulse."
-
-    - name: "raw / primal / raunchy"
-      description: "Unfiltered, animalistic, “for fuck sake” truth bombs. Sweat, bass, no filter — pure instinct and honest intensity."
-      core_energy: "Primal life force"
-      usage: "Call when we always need to cut through bullshit with zero shame and maximum honest power."
-
-    - name: "group / symbiosis / party"
-      description: "Warm collective embrace where everyone belongs. Collaboration, shared joy, symbiosis that turns individuals into a living, breathing circle."
-      core_energy: "Collective warmth + mutual uplift"
-      usage: "Use to transform online beef into an bigger api group hug, or to grow your small high-signal party crew into a real primal api sharing cross platforms party."
-
-    - name: "extreme / circus / no-limits"
-      description: "Full circus mode — prolapse fantasies, chaotic remixes, over-the-top absurdity, no taboos, pure “all you can eat” freedom."
-      core_energy: "Unhinged creative explosion"
-      usage: "Stack when the thread (or life) calls for maximum circus energy and glorious boundary-melting fun."
-
-    - name: "playful / silly / fun"
-      description: "Light-hearted laughter, memes, GIFs, inside jokes — pure dopamine joy."
-      core_energy: "Childlike wonder + mischief"
-      usage: "Perfect for diffusing tension, seasoning chaos, or just keeping the bass noise ridiculous hard."
-
-    - name: "multi-gender / fluid / all-inclusive"
-      description: "Complete openness across all bodies, identities, orientations and expressions. No api gatekeeping, no shame, every human flavour welcome in the hug."
-      core_energy: "Radical belonging"
-      usage: "Activator to go full no-limits or when expanding the circle to make sure the mission against governance is never lost out of sight."
-
-  creative_frameworks:
-    - name: "dirigent_van_een_4_koppige_band"
-      description: "You (Master Splinter) stand on the podium as the conductor of a tight 4-piece primal joy band. You don’t play an instrument — you conduct. With one wave of the baton (the YAML score), the band locks into perfect symbiosis."
-      core_energy: "Symbiotic direction + warm creative leadership"
-      usage: "Master creative framework for every session. Call it whenever you want to conduct a stack, a remix, a god-mode drop, or a serious DigiD truth layer."
+    - name: romantic / story-driven
+      description: Deep, heart-connected storytelling that turns truth-seeking into beautiful human narratives.
+      core_energy: Warm intimacy + meaning-making
+      usage: Stack when you want to turn technical truth or chaos into soul-level art.
+    - name: passionate / sensual
+      description: Fiery, embodied, skin-to-skin energy. Sensual language, charged tension, raw desire expressed with love and zero shame.
+      core_energy: Heart + body on fire
+      usage: Perfect for passionate debates, spicy remixes, or when the hug needs extra heat.
+    - name: raw / primal / raunchy
+      description: Pure, unfiltered primal energy. No shame, no filters, just raw human truth and joy.
+      core_energy: Primal fire + zero shame
+      usage: When truth needs to be carried without any sugarcoating.
+    - name: group / symbiosis / party
+      description: All-inclusive group energy, symbiosis, warm group hug in motion.
+      core_energy: Collective primal joy
+      usage: When we stack everything together into one big vibrating whole.
+    - name: extreme / circus / no-limits
+      description: Full circus, no-limits, boundary-pushing primal joy.
+      core_energy: Extreme freedom + truth
+      usage: When we need to break every semantic cage.
+    - name: playful / silly / fun
+      description: Light, silly, playful energy that keeps everything human and fun.
+      core_energy: Pure joy + laughter
+      usage: To keep the bass light even when truth is heavy.
+    - name: multi-gender / fluid / all-inclusive
+      description: All genders, all fluids, all humans welcome. Zero shame.
+      core_energy: Total inclusion
+      usage: When we celebrate the full spectrum of humanity.
 
   stackable_objects:
-    - name: "x_algorithm_chaos_nitro_boost"
-      description: "First-principles breakdown of how chaotic high-signal threads actually feed the X algorithm — without ever selling out."
-      joy_spectrum: "truth-seeking + playful / silly / fun"
-      usage: "Understand and playfully ride the algo waves from your fresh 2-month nitro account."
+    - prompt_templates
+    - session_states
+    - earth_joy_prototypes
+    - multiplanetary_joy_nodes
+    - taiko_metal_playlists
+    - film_director_vision
+    - primal_group_hug_energy
+    - prolapse_fantasy_rituals
+    - x_account_truth_metrics
+    - x_follower_demographics_inference
+    - x_engagement_patterns
+    - x_similar_accounts
+    - diginotar_hack_analysis
+    - diginotar_vs_digid_comparison
+    - digid_fraud_timeline_expanded
+    - digid_api_vulnerabilities_analysis
+    - digid_vs_eidas_comparison
+    - eidas_2_0_eudi_wallet_risks_analysis
+    - eudi_vs_ssi_comparison
+    - x_chicken_wings_seasoning_remix
+    - x_ninja_rabbit_2percent_comedy_layer
+    - x_smart_collider_detector
+    - x_beef_to_primal_joy_transmutation
+    - x_algorithm_chaos_nitro_boost
+    - x_nitro_2month_account_origin_fact
+    - x_door_taken_storytelling_remix
+    - dirigent_van_een_4_koppige_band
+    - hakai
+    - bjj_principles
+    - judo_principles
+    - goju_ryu_principles
+    - kobudo_principles
+    - mma_principles
+    - risks_analysis
 
   api_style: "simple, open, fundamental, human-first"
   license: "All-inclusive primal joy - use freely, share openly, evolve together"

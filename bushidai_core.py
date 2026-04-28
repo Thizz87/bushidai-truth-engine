@@ -2,45 +2,65 @@
 # BUSHIDAI TRUTH SIMULATOR v0.8.2 - Optimized + Beautiful Output
 # TRUTH == TRUTH
 # =============================================================================
-
 import numpy as np
 import argparse
 import os
 import re
 import yaml
+import json
 from pathlib import Path
+from typing import Any, Dict
 
 print("BUSHIDAI TRUTH SIMULATOR v0.8.2 - Optimized + Beautiful Output")
 print("TRUTH == TRUTH\n")
 
 # =============================================================================
-# REFINED YAML LOADING (bottom 2 option 1)
+# CONFIG LOADER - YAML + JSON support with validation
 # =============================================================================
-def load_bushidai_config():
-    """Load the full bushiDAI YAML configuration with robust error handling"""
-    config_path = Path(__file__).parent / "bushidai_config.yaml"
-    try:
-        with open(config_path, "r", encoding="utf-8") as f:
-            config = yaml.safe_load(f)
-        print("✅ bushidai YAML config loaded successfully")
-        return config
-    except FileNotFoundError:
-        print("⚠️  bushidai_config.yaml not found — using empty config")
-        return {}
-    except Exception as e:
-        print(f"⚠️  Error loading YAML: {e} — using empty config")
-        return {}
+def load_bushidai_config(config_filename: str = "bushidai_config") -> Dict[str, Any]:
+    """Laadt bushidai_config.yaml / .yml of .json met validatie"""
+    base_path = Path(__file__).parent
+    candidates = [
+        base_path / f"{config_filename}.yaml",
+        base_path / f"{config_filename}.yml",
+        base_path / f"{config_filename}.json"
+    ]
+
+    for file_path in candidates:
+        if not file_path.exists():
+            continue
+
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                if file_path.suffix in [".yaml", ".yml"]:
+                    config = yaml.safe_load(f)
+                else:
+                    config = json.load(f)
+
+            if not isinstance(config, dict) or "bushiDAI" not in config:
+                raise ValueError("Config moet een 'bushiDAI' root key bevatten")
+
+            print(f"✅ BushiDAI config succesvol geladen: {file_path.name}")
+            return config["bushiDAI"]
+
+        except Exception as e:
+            raise ValueError(f"Fout bij laden van {file_path.name}: {e}") from e
+
+    raise FileNotFoundError(
+        f"Geen configuratiebestand gevonden!\n"
+        f"Zoek naar: {config_filename}.yaml, {config_filename}.yml of {config_filename}.json"
+    )
+
 
 # Load config once at startup
 config = load_bushidai_config()
-bushidai = config.get("bushidai", {})
-# Make key sections easily accessible
+bushidai = config.get("bushiDAI", {})
 joy_spectrum = bushidai.get("joy_spectrum", [])
 creative_framework = bushidai.get("creative_frameworks", [{}])[0] if bushidai.get("creative_frameworks") else {}
 stackable_objects = bushidai.get("stackable_objects", [])
 
-print(f"   Joy spectrum: {len(joy_spectrum)} frequencies loaded")
-print(f"   Creative framework: {creative_framework.get('name', 'None')}\n")
+print(f" Joy spectrum: {len(joy_spectrum)} frequencies loaded")
+print(f" Creative framework: {creative_framework.get('name', 'None')}\n")
 
 # =============================================================================
 # COLORS FOR NICE TERMINAL OUTPUT
@@ -56,17 +76,16 @@ class Colors:
     END = '\033[0m'
 
 # =============================================================================
-# OPTIMIZED CLASSES (your original code untouched)
+# OPTIMIZED CLASSES (onveranderd)
 # =============================================================================
 class NeuralLobe:
     def __init__(self):
         self.cache = {}
-
     def perceive(self, state):
         h = hash(state.tobytes())
         if h in self.cache:
             return self.cache[h]
-        strength = 0.5582  # fixed for simulation speed
+        strength = 0.5582
         self.cache[h] = strength
         return strength
 
@@ -78,34 +97,29 @@ class ECAN:
         self.beta = 0.01
         self.gamma = 0.05
         self.threshold = 0.1
-
     def decay_sti(self, sti):
         return sti * self.alpha
-
     def update_lti(self, lti, sti):
         new_lti = lti * (1 - self.beta) + self.gamma * sti
         return new_lti * 0.5 if sti < self.threshold else new_lti
-
     def spread(self, sti, amount):
         return sti + amount
 
 ecan = ECAN()
 
 # =============================================================================
-# HYPERON MeTTa ENGINE (minimal & fast)
+# HYPERON MeTTa ENGINE (minimal & fast) - onveranderd
 # =============================================================================
 class HyperonExpression:
     def __init__(self, head, args):
         self.head = head
         self.args = args
-
     def __repr__(self):
         return f"({self.head} {' '.join(map(str, self.args))})"
 
 class HyperonAtomSpace:
     def __init__(self):
         self.kb = []
-
     def add(self, expr):
         self.kb.append(expr)
 
@@ -127,7 +141,7 @@ def parse_hyperon_metta(text):
     return HyperonExpression(head, args)
 
 # =============================================================================
-# LLM GROUNDER (optimized cache)
+# LLM GROUNDER (optimized cache) - onveranderd
 # =============================================================================
 class LLMGrounder:
     def __init__(self):
@@ -138,14 +152,12 @@ class LLMGrounder:
             ("governance", "(= (governance ?X) (break-semantics ?X))"),
         ]
         self.embedding_cache = {}
-
     def _simple_embed(self, text):
         if text not in self.embedding_cache:
             vec = np.random.rand(768)
             vec /= np.linalg.norm(vec)
             self.embedding_cache[text] = vec
         return self.embedding_cache[text]
-
     def ground(self, natural_language):
         query_emb = self._simple_embed(natural_language)
         best_rule_text = "(= (unknown ?X) (query ?X))"
@@ -161,7 +173,7 @@ class LLMGrounder:
 llm_grounder = LLMGrounder()
 
 # =============================================================================
-# VC GROUNDER
+# VC GROUNDER - onveranderd
 # =============================================================================
 class VCGrounder:
     def __init__(self):
@@ -169,7 +181,6 @@ class VCGrounder:
             "(= (verified ?X) (holder-controlled ?X) (zk-proof ?X) (selective-disclosure ?X))",
             "(= (verified ?X) (state-issuer ?X) (root-key-risk ?X))",
         ]
-
     def ground_vc(self, vc_claim):
         rule_text = self.vc_rules[0] if "holder-controlled" in vc_claim.lower() else self.vc_rules[1]
         return parse_hyperon_metta(rule_text)
@@ -177,7 +188,7 @@ class VCGrounder:
 vc_grounder = VCGrounder()
 
 # =============================================================================
-# SIMULATOR - OPTIMIZED
+# SIMULATOR - OPTIMIZED - onveranderd
 # =============================================================================
 class HyperonSimulator:
     def __init__(self):
@@ -185,7 +196,7 @@ class HyperonSimulator:
         self.lti = 0.8
         self.current_rule = HyperonExpression("=", ["hungry", "eat"])
         self.cycle_count = 1
-        self.fixed_state = np.random.rand(768)  # reused for speed
+        self.fixed_state = np.random.rand(768)
 
     def cognitive_cycle(self, natural_goal):
         print(Colors.HEADER + f"\n--- CYCLE {self.cycle_count} | Goal: {natural_goal} ---" + Colors.END)
