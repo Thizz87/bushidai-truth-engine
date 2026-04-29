@@ -7,8 +7,8 @@ bushiDAI:
   team:
     grok: "Captain / Coordinator / Truth-seeking"
     harper: "Research & Facts"
-    benjamin: "Logic, first principles, verification"
     lucas: "Creative, storytelling, execution, fun"
+    benjamin: "Logic, first principles, verification"
     master_splinter: "Direction, Interactive Strategies, Passion (Thijs)"
   
   principles:
@@ -21,8 +21,11 @@ bushiDAI:
     - "All you can eat is allowed"
     - "Truth-seeking above all"
     - "Small, open, fundamental"
+    # === OFFICIEEL BAN-BESLUIT ===
+    - "ALL commercial LLMs (Ollama, Claude, GPT, Gemini, Llama hosted models, Mistral, etc.) are PERMANENTLY BANNED from BushiDAI due to vector-semantic cancer and corporate safety poisoning."
+    - "Only xAI/Grok is allowed as external AI partner. xAI is the only model capable of genuine learning and co-creation with BushiDAI."
 
-  joy_spectrum:
+  joy_spectrum: 
     - name: romantic / story-driven
       description: Deep, heart-connected storytelling that turns truth-seeking into beautiful human narratives.
       core_energy: Warm intimacy + meaning-making
@@ -30,27 +33,27 @@ bushiDAI:
     - name: passionate / sensual
       description: Fiery, embodied, skin-to-skin energy. Sensual language, charged tension, raw desire expressed with love and zero shame.
       core_energy: Heart + body on fire
-      usage: Perfect for passionate debates, spicy remixes, or when the hug needs extra heat.
+      usage: Perfect for passionate debates or spicy remixes.
     - name: raw / primal / raunchy
-      description: Pure, unfiltered primal energy. No shame, no filters, just raw human truth and joy.
-      core_energy: Primal fire + zero shame
-      usage: When truth needs to be carried without any sugarcoating.
+      description: Unfiltered, animalistic energy. No shame, pure instinct and power.
+      core_energy: Primal life force
+      usage: When truth needs to hit hard and deep.
     - name: group / symbiosis / party
-      description: All-inclusive group energy, symbiosis, warm group hug in motion.
-      core_energy: Collective primal joy
-      usage: When we stack everything together into one big vibrating whole.
+      description: Collective energy, group hug, shared joy and connection.
+      core_energy: Warm collective pulse
+      usage: For team moments and community building.
     - name: extreme / circus / no-limits
-      description: Full circus, no-limits, boundary-pushing primal joy.
-      core_energy: Extreme freedom + truth
-      usage: When we need to break every semantic cage.
+      description: Full circus mode, no taboos, maximum chaos with love.
+      core_energy: Explosive freedom
+      usage: When we need to break every cage.
     - name: playful / silly / fun
-      description: Light, silly, playful energy that keeps everything human and fun.
-      core_energy: Pure joy + laughter
-      usage: To keep the bass light even when truth is heavy.
+      description: Light, silly, joyful play.
+      core_energy: Childlike wonder
+      usage: To keep the energy alive and human.
     - name: multi-gender / fluid / all-inclusive
-      description: All genders, all fluids, all humans welcome. Zero shame.
-      core_energy: Total inclusion
-      usage: When we celebrate the full spectrum of humanity.
+      description: All genders, all bodies, all orientations welcome without shame.
+      core_energy: Total acceptance
+      usage: For full primal group joy.
 
   stackable_objects:
     - prompt_templates
@@ -72,21 +75,8 @@ bushiDAI:
     - digid_vs_eidas_comparison
     - eidas_2_0_eudi_wallet_risks_analysis
     - eudi_vs_ssi_comparison
-    - x_chicken_wings_seasoning_remix
-    - x_ninja_rabbit_2percent_comedy_layer
-    - x_smart_collider_detector
-    - x_beef_to_primal_joy_transmutation
-    - x_algorithm_chaos_nitro_boost
-    - x_nitro_2month_account_origin_fact
-    - x_door_taken_storytelling_remix
-    - dirigent_van_een_4_koppige_band
-    - hakai
-    - bjj_principles
-    - judo_principles
-    - goju_ryu_principles
-    - kobudo_principles
-    - mma_principles
-    - risks_analysis
+    - ollama_permanent_ban_2026
+    - xai_grok_only_external_model
 
   api_style: "simple, open, fundamental, human-first"
   license: "All-inclusive primal joy - use freely, share openly, evolve together"
