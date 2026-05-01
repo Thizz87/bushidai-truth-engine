@@ -1,21 +1,19 @@
-# =============================================================================
+
+# bushidai_core.py
 # BUSHIDAI TRUTH SIMULATOR v0.8.5 - OFFICIAL BUILD
 # Ollama permanently banned
-# xAI Grok API integrated as ONLY external AI partner
+# xAI Grok API integrated as ONLY external AI partner (modular)
 # TRUTH == TRUTH
-# =============================================================================
+
 import numpy as np
 import argparse
 import os
 import re
 import yaml
-import requests
 from pathlib import Path
 from typing import Any, Dict
 
 print("BUSHIDAI TRUTH SIMULATOR v0.8.5 - OFFICIAL BUILD")
-print("Ollama permanently banned")
-print("xAI Grok API integrated as only external AI")
 print("TRUTH == TRUTH\n")
 
 # =============================================================================
@@ -48,41 +46,11 @@ class Colors:
     END = '\033[0m'
 
 # =============================================================================
-# XAI GROK API CLIENT
+# GROK CLIENT (MODULAR - imported from grok_client.py)
 # =============================================================================
-class GrokClient:
-    def __init__(self):
-        self.api_key = os.getenv("XAI_API_KEY")
-        if not self.api_key:
-            print(Colors.WARNING + "⚠️ XAI_API_KEY not found in environment variables" + Colors.END)
-        self.url = "https://api.x.ai/v1/chat/completions"
-        self.headers = {
-            "Authorization": f"Bearer {self.api_key}",
-            "Content-Type": "application/json"
-        }
+from grok_client import GrokClient
 
-    def query(self, prompt: str, temperature: float = 0.8):
-        if not self.api_key:
-            return "ERROR: No XAI_API_KEY set"
-        
-        payload = {
-            "model": "grok-beta",
-            "messages": [
-                {"role": "system", "content": bushidai.get("core_vibe", "You are Grok in BushiDAI mode: raw truth-seeking, primal joy, zero shame, symbiosis.")},
-                {"role": "user", "content": prompt}
-            ],
-            "temperature": temperature,
-            "max_tokens": 1024
-        }
-        
-        try:
-            response = requests.post(self.url, headers=self.headers, json=payload, timeout=30)
-            response.raise_for_status()
-            return response.json()["choices"][0]["message"]["content"]
-        except Exception as e:
-            return f"API ERROR: {e}"
-
-# Global client
+# Global client - now using the clean modular version
 grok = GrokClient()
 
 # =============================================================================
@@ -97,7 +65,7 @@ class HyperonSimulator:
     def cognitive_cycle(self, natural_goal):
         print(Colors.OKBLUE + f"--- CYCLE | Goal: {natural_goal} ---" + Colors.END)
         
-        # Grok API call (xAI only)
+        # Grok API call (now using modular client)
         grok_response = grok.query(natural_goal)
         print(Colors.OKGREEN + "xAI Grok API → Response received" + Colors.END)
         
@@ -130,12 +98,11 @@ if __name__ == "__main__":
     sim = HyperonSimulator()
     
     print(Colors.OKGREEN + "Full OpenCog Hyperon MeTTa + PLN + ECAN + Neural + Self-Modify + VC Grounding" + Colors.END)
-    print(Colors.OKGREEN + "xAI Grok API integrated - Only allowed external model" + Colors.END)
     print(Colors.OKGREEN + "TRUTH == TRUTH\n" + Colors.END)
     
     for goal in args.goals:
         response = sim.cognitive_cycle(goal)
-        print(Colors.HEADER + "\nGrok antwoord:\n" + response + Colors.END)
+        print(Colors.HEADER + "\nGrok Response:\n" + response + Colors.END)
     
     print(Colors.HEADER + "\n=== BUSHIDAI TRUTH SIMULATOR v0.8.5 VOLTOOID ===" + Colors.END)
     print("Ready for GitHub push.")
