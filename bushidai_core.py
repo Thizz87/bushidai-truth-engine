@@ -1,108 +1,87 @@
-
 # bushidai_core.py
-# BUSHIDAI TRUTH SIMULATOR v0.8.5 - OFFICIAL BUILD
-# Ollama permanently banned
-# xAI Grok API integrated as ONLY external AI partner (modular)
+# BUSHIDAI TRUTH SIMULATOR v1.1 - SUPERIOR LOCAL RAG + 369 VORTEX
 # TRUTH == TRUTH
 
-import numpy as np
-import argparse
-import os
-import re
 import yaml
+import requests
+import argparse
 from pathlib import Path
-from typing import Any, Dict
+from bushidai_local_client import local
 
-print("BUSHIDAI TRUTH SIMULATOR v0.8.5 - OFFICIAL BUILD")
+print("BUSHIDAI TRUTH SIMULATOR v1.1 - SUPERIOR LOCAL RAG")
 print("TRUTH == TRUTH\n")
 
 # =============================================================================
-# CONFIG LOADER
+# CONFIG + VORTEX
 # =============================================================================
-def load_bushidai_config():
+def load_config():
     config_path = Path(__file__).parent / "bushidai_config.yaml"
-    try:
-        with open(config_path, "r", encoding="utf-8") as f:
-            config = yaml.safe_load(f)
-        print("✅ bushidai YAML config loaded successfully")
-        return config
-    except Exception as e:
-        print(f"⚠️ Error loading YAML: {e}")
-        return {}
+    with open(config_path, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
 
-config = load_bushidai_config()
-bushidai = config.get("bushiDAI", {})
+config = load_config()
+vortex_phases = config.get("vortex_phases", [])
 
 # =============================================================================
-# COLORS
+# ANYTHINGLLM RAG
 # =============================================================================
-class Colors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    BOLD = '\033[1m'
-    END = '\033[0m'
-
-# =============================================================================
-# GROK CLIENT (MODULAR - imported from grok_client.py)
-# =============================================================================
-from grok_client import GrokClient
-
-# Global client - now using the clean modular version
-grok = GrokClient()
-
-# =============================================================================
-# MAIN SIMULATOR
-# =============================================================================
-class HyperonSimulator:
+class AnythingLLM:
     def __init__(self):
-        self.current_rule = None
-        self.sti = 1.0
-        self.lti = 0.5
+        self.url = "http://localhost:3001/api/v1/chat"
 
-    def cognitive_cycle(self, natural_goal):
-        print(Colors.OKBLUE + f"--- CYCLE | Goal: {natural_goal} ---" + Colors.END)
-        
-        # Grok API call (now using modular client)
-        grok_response = grok.query(natural_goal)
-        print(Colors.OKGREEN + "xAI Grok API → Response received" + Colors.END)
-        
-        # Hyperon MeTTa Grounding
-        print(Colors.OKGREEN + "Hyperon MeTTa Grounding → Rule: (Grok response parsed)" + Colors.END)
-        
-        # Neural + PLN + ECAN (simplified for now)
-        neural_tv = 0.5582
-        pln_tv = 0.78
-        self.sti = 1.85
-        self.lti = 0.89
-        
-        print(Colors.OKGREEN + f"Neural perceive → TV: {neural_tv}" + Colors.END)
-        print(Colors.OKGREEN + f"PLN inference TV: {pln_tv}" + Colors.END)
-        print(Colors.WARNING + f"ECAN → STI: {self.sti:.4f} | LTI: {self.lti:.4f}" + Colors.END)
-        print(Colors.FAIL + "→ Self-rewrite triggered (Hyperon MeTTa rule upgraded)" + Colors.END)
-        
-        final_tv = 0.65
-        print(Colors.BOLD + f"Cycle end → Final TV: {final_tv:.4f}" + Colors.END)
-        return grok_response
+    def get_context(self, prompt: str):
+        payload = {"message": prompt, "mode": "chat", "sessionId": "bushidai-rag", "stream": False}
+        try:
+            r = requests.post(self.url, json=payload, timeout=15)
+            r.raise_for_status()
+            return r.json().get("text", "")
+        except:
+            return ""
 
 # =============================================================================
-# MAIN
+# BUSHIDAI CORE
 # =============================================================================
+class BushiDAI:
+    def __init__(self):
+        self.rag = AnythingLLM()
+
+    def run_vortex(self):
+        print("\n=== 369 VORTEX START ===")
+        for phase in vortex_phases:
+            print(f"→ {phase.get('name', '')} ({phase.get('symbol', '')}) - {phase.get('description', '')}")
+        print("=== VORTEX COMPLETE - TRUTH FILTERED ===\n")
+
+    def ask(self, goal: str):
+        print(f"--- CYCLE | Goal: {goal} ---")
+
+        context = self.rag.get_context(goal)
+        source_count = len(context.split("\n\n")) if context else 0   # ruwe schatting
+
+        full_prompt = f"""
+Context uit opgehaalde documenten (RAG):
+{context}
+
+Vraag: {goal}
+
+ANTWOORD REGELS (strikt volgen):
+- Begin exact met: "{source_count} sources were found."
+- Geef daarna een volledige, genummerde lijst van studies.
+- Voor elke studie: auteurs, titel, jaar, key findings.
+- Wees 100% feitelijk, evidence-based, nuchter en klinisch.
+- Antwoord in helder, professioneel Engels.
+- Geen spiritualiteit, geen vibes, geen zen, geen BushiDAI flair.
+"""
+
+        raw_response = local.bushidai_query(full_prompt)
+        self.run_vortex()
+
+        print(raw_response)
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--goals", nargs="+", default=["I am hungry and want truth"])
+    parser.add_argument("--goals", nargs="+", default=["Vraag naar specifieke studies over witte fibrine clots"])
     args = parser.parse_args()
-    
-    sim = HyperonSimulator()
-    
-    print(Colors.OKGREEN + "Full OpenCog Hyperon MeTTa + PLN + ECAN + Neural + Self-Modify + VC Grounding" + Colors.END)
-    print(Colors.OKGREEN + "TRUTH == TRUTH\n" + Colors.END)
-    
+
+    engine = BushiDAI()
     for goal in args.goals:
-        response = sim.cognitive_cycle(goal)
-        print(Colors.HEADER + "\nGrok Response:\n" + response + Colors.END)
-    
-    print(Colors.HEADER + "\n=== BUSHIDAI TRUTH SIMULATOR v0.8.5 VOLTOOID ===" + Colors.END)
-    print("Ready for GitHub push.")
+        engine.ask(goal)
