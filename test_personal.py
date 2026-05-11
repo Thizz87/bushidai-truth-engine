@@ -1,40 +1,34 @@
-# test_personal.py
-# Simpele test voor je hypothetische persoon
+# test_core.py
+# BUSHIDAI - Interactieve Shell (dynamisch)
 # TRUTH == TRUTH
 
-import requests
+from bushidai_core import BushiDAI
 
-# URL van de lokale BushiDAI API
-url = "http://127.0.0.1:8000/personal-test"
+if __name__ == "__main__":
+    engine = BushiDAI()
 
-# Jouw test data (je mag dit altijd aanpassen)
-data = {
-    "bsn": "13.23.69.420",
-    "symptoms": [
-        "lymph nodes swelling",
-        "face tingling",
-        "no fever",
-        "normal blood tests"
-    ],
-    "notes": "Test subject - hypothetical only"
-}
+    print("🚀 BushiDAI Interactieve Shell")
+    print("TRUTH == TRUTH")
+    print("Typ je vraag en druk op Enter.")
+    print("Typ 'exit', 'quit' of 'stop' om te stoppen.\n")
 
-print("🚀 Sending test to BushiDAI mRNA Truth Node...\n")
+    while True:
+        try:
+            goal = input("👉 ").strip()
 
-# Stuur de aanvraag
-response = requests.post(url, json=data)
+            if goal.lower() in ["exit", "quit", "stop", "q"]:
+                print("\nBushiDAI afgesloten.\n")
+                break
 
-# Toon het resultaat netjes
-if response.status_code == 200:
-    result = response.json()
-    print("✅ Succes!")
-    print(f"BSN: {result['bsn']}")
-    print(f"Symptomen: {result['symptoms']}")
-    print("\n--- Public research patterns ---")
-    for pattern in result.get("public_research_patterns", []):
-        print(f"• {pattern}")
-    print("\nNote:", result.get("note"))
-    print("Vortex stage:", result.get("vortex_stage"))
-else:
-    print("❌ Fout:", response.status_code)
-    print(response.text)
+            if not goal:
+                continue
+
+            print("\n" + "=" * 80)
+            engine.ask(goal)          # Roept de core aan
+            print("=" * 80 + "\n")
+
+        except KeyboardInterrupt:
+            print("\n\nBushiDAI afgesloten.")
+            break
+        except Exception as e:
+            print(f"\nError: {e}\n")

@@ -1,6 +1,4 @@
-# bushidai_local_client.py
-# Lokale Ollama client - strict scientific voor truth-seeking
-
+# bushidai_local_client.py - OPTIMALE OLLAMA CLIENT
 import yaml
 from pathlib import Path
 import requests
@@ -15,36 +13,34 @@ bushidai_config = load_bushidai_config()
 class BushiDAI_LocalClient:
     def __init__(self):
         self.url = "http://localhost:11434/api/chat"
+        self.model = "llama3.2"          # snel en stabiel
 
     def _build_system_prompt(self) -> str:
         return """
 You are a cold, strict, highly trained scientific analyst.
 Answer ALWAYS in clear, structured, evidence-based English.
-
-Rules (never break):
-- Start with the exact number of sources found: "X sources were found."
-- Give a complete, numbered list of studies: authors, title, year, key findings.
-- Base everything strictly on the provided RAG context.
-- Be factual, precise, clinical and uncompromising.
-- No spiritual language, no zen, no ki, no vibes, no BushiDAI flair, no poetry, no softening.
+Be direct, factual and precise. No fluff. No hedging.
 """
 
-    def call(self, prompt: str, model: str = "llama3.2", temperature: float = 0.0):
+    def bushidai_query(self, prompt: str, temperature: float = 0.0):
         payload = {
-            "model": model,
+            "model": self.model,
             "messages": [
                 {"role": "system", "content": self._build_system_prompt()},
                 {"role": "user", "content": prompt}
             ],
-            "temperature": temperature,
-            "stream": False
+            "temperature": temperature,      # 0.0 = maximaal feitelijk
+            "stream": False,
+            "options": {
+                "num_ctx": 8192,             # grotere context
+                "num_thread": 0              # laat Ollama zelf optimaliseren
+            }
         }
-        response = requests.post(self.url, json=payload, timeout=30)
-        response.raise_for_status()
-        return response.json()["message"]["content"]
+        try:
+            response = requests.post(self.url, json=payload, timeout=60)
+            response.raise_for_status()
+            return response.json()["message"]["content"]
+        except Exception as e:
+            return f"OLLAMA ERROR: {e} (is Ollama running?)"
 
-    def bushidai_query(self, prompt: str):
-        return self.call(prompt)
-
-# Globale instance
 local = BushiDAI_LocalClient()
