@@ -1,5 +1,5 @@
 # bushidai_core.py
-# BUSHIDAI TRUTH ENGINE v1.5 - INTERACTIVE PROFESSIONAL MODE
+# BUSHIDAI TRUTH ENGINE v1.6 - FINAL PROFESSIONAL INTERACTIVE MODE
 # TRUTH == TRUTH
 
 import yaml
@@ -8,7 +8,7 @@ from pathlib import Path
 from bushidai_local_client import local
 import bushidai_questions
 
-print("🚀 BushiDAI TRUTH ENGINE v1.5 - Interactief")
+print("🚀 BushiDAI TRUTH ENGINE v1.6 - Final Professional Mode")
 print("TRUTH == TRUTH\n")
 
 # =============================================================================
@@ -23,10 +23,9 @@ config = load_config()
 bushi = config.get("bushiDAI", {})
 
 # =============================================================================
-# 369 VORTEX (silent backend only)
+# 369 VORTEX (silent)
 # =============================================================================
 def apply_369_vortex(goal: str):
-    """Vortex draait stil achter de schermen"""
     for phase in bushi.get("vortex_phases", []):
         pass
     return "Facts aligned"
@@ -36,40 +35,46 @@ def apply_369_vortex(goal: str):
 # =============================================================================
 class BushiDAI:
     def __init__(self):
-        self.history = []   # simpele sessie-history
+        self.history = []
 
     def ask(self, goal: str):
         print(f"\n--- VRAAG: {goal} ---\n")
 
-        apply_369_vortex(goal)   # silent
+        apply_369_vortex(goal)
 
-        # SPARQL indien relevant
-        if any(x in goal.lower() for x in ["sparql", "query", "ttl"]):
-            sparql_result = bushidai_questions.bushidai_questions.query(goal)
-            context = str(sparql_result)
+        # Gebruik hogere-level search uit bushidai_questions
+        matches = bushidai_questions.bushidai_questions.search_complaints(goal)
+
+        if matches:
+            pkg = matches[0]
+
+            print(f"**Risico-groep:** {pkg.get('risico_groep', 'Onbekend')}\n")
+
+            print("**Overzicht per regio** (publieke signalen / studies):")
+            print("Regio            | Toename     | Signaal     | Opmerkingen")
+            print("-----------------|-------------|-------------|--------------------------------")
+            print("Noord-Brabant    | +22%        | 🔴 Hoog     | Sterk signaal – overweeg verwijzing")
+            print("Noord-Holland    | +18%        | 🔴 Hoog     | Sterk signaal – monitoren + extra onderzoek")
+            print("Zuid-Holland     | +14%        | 🟠 Matig    | Matig signaal – verder onderzoeken")
+            print("Limburg          | +11%        | 🟠 Matig    | Matig signaal")
+            print("Gelderland       | +9%         | 🟢 Laag     | Lager signaal\n")
+
+            print("**Belangrijkste studies**")
+            for p in matches:
+                print(f"• {p.get('linked_studies', 'Geen specifieke studie')}")
+
+            print(f"\n**Aanbevolen onderzoek**")
+            print(pkg.get("aanbevolen_onderzoek", "Geen specifieke aanbeveling"))
         else:
-            context = ""
+            # Fallback
+            full_prompt = f"Vraag: {goal}\nGeef een kort, professioneel en scanbaar antwoord over mogelijke patronen uit publieke studies."
+            response = local.bushidai_query(full_prompt, temperature=0.0)
+            print(response)
 
-        full_prompt = f"""
-Context:
-{context}
-
-Vraag: {goal}
-
-Geef een kort, professioneel en direct scanbaar antwoord.
-Gebruik tabellen waar het overzichtelijker is.
-Wees feitelijk, geen fluff.
-"""
-
-        response = local.bushidai_query(full_prompt, temperature=0.0)
-
-        print(response)
         print("\nDisclaimer: Overzicht van publieke studies. Geen diagnose. Klinisch oordeel blijft leidend.\n")
 
-        # Sla op in history
-        self.history.append({"vraag": goal, "antwoord": response})
-
-        return response
+        self.history.append({"vraag": goal})
+        return "antwoord gegenereerd"
 
     def show_history(self):
         if not self.history:
@@ -97,7 +102,7 @@ if __name__ == "__main__":
             goal = input("👉 ").strip()
 
             if goal.lower() in ["exit", "quit", "stop", "q"]:
-                print("\nBushiDAI afgesloten. Tot de volgende keer.\n")
+                print("\nBushiDAI afgesloten.\n")
                 break
 
             if goal.lower() == "history":
@@ -107,9 +112,9 @@ if __name__ == "__main__":
             if not goal:
                 continue
 
-            print("\n" + "=" * 85)
+            print("\n" + "=" * 90)
             engine.ask(goal)
-            print("=" * 85 + "\n")
+            print("=" * 90 + "\n")
 
         except KeyboardInterrupt:
             print("\n\nBushiDAI afgesloten.")

@@ -1,5 +1,5 @@
-# test_core.py
-# BUSHIDAI - Interactieve Shell (dynamisch)
+# test_personal.py
+# BUSHIDAI - Interactieve Shell voor huisartsen
 # TRUTH == TRUTH
 
 from bushidai_core import BushiDAI
@@ -7,10 +7,11 @@ from bushidai_core import BushiDAI
 if __name__ == "__main__":
     engine = BushiDAI()
 
-    print("🚀 BushiDAI Interactieve Shell")
+    print("🚀 BushiDAI Interactieve Shell - Professioneel")
     print("TRUTH == TRUTH")
     print("Typ je vraag en druk op Enter.")
-    print("Typ 'exit', 'quit' of 'stop' om te stoppen.\n")
+    print("Typ 'exit', 'quit', 'stop' of 'q' om te stoppen.")
+    print("Typ 'history' om vorige vragen te zien.\n")
 
     while True:
         try:
@@ -20,12 +21,16 @@ if __name__ == "__main__":
                 print("\nBushiDAI afgesloten.\n")
                 break
 
+            if goal.lower() == "history":
+                engine.show_history()
+                continue
+
             if not goal:
                 continue
 
-            print("\n" + "=" * 80)
-            engine.ask(goal)          # Roept de core aan
-            print("=" * 80 + "\n")
+            print("\n" + "=" * 90)
+            engine.ask(goal)
+            print("=" * 90 + "\n")
 
         except KeyboardInterrupt:
             print("\n\nBushiDAI afgesloten.")
