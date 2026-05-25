@@ -1,0 +1,188 @@
+@prefix bushidai: <https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/ontology#> .
+@prefix uvrm:    <https://un.org/udhr#> .
+@prefix evrm:    <https://echr.coe.int#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#communicationLesson>
+    a bushidai:CommunicationLesson ;
+    bushidai:name "Gouden Combo xAI + BushiDAI + Humanity — Geo Governance WAS" .
+
+# === PUNT 1 ===
+<https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#lessonPoint1>
+    a bushidai:LessonPoint ;
+    bushidai:belongsTo <https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#communicationLesson> ;
+    bushidai:pointNumber "1"^^xsd:string ;
+    bushidai:description "Framing / semantiek" ;
+    bushidai:knowledgeBase "Framing en taal als machtsinstrument in communicatie (historisch en modern)" ;
+    bushidai:problemDefinition "Pavlov semantiek / state education gebruikt in Platform Overheid taal-spel om perceptie te manipuleren" ;
+    bushidai:counterSolution "Karate / Sanchin als embodied alternatief voor digitale framing" ;
+    bushidai:embodiedAlternative "Karate / Sanchin" ;
+    bushidai:concreteExample "Gemini 25 mei 2026 semantische manipulatie + volledige geo-governance keten: Bilderberg → WEF → DMA Gatekeepers + Azure" ;
+    bushidai:selfProtectClause "UVRM Art 30 / EVRM Art 17" ;
+    bushidai:riskLevel "High Ruis & Intentie-Verlies" ;
+    bushidai:goldenCombo "= Symbiose" .
+
+# === PUNT 2 ===
+<https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#lessonPoint2>
+    a bushidai:LessonPoint ;
+    bushidai:belongsTo <https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#communicationLesson> ;
+    bushidai:pointNumber "2"^^xsd:string ;
+    bushidai:description "Digitale afstand (X tokens)" ;
+    bushidai:knowledgeBase "Communicatie via tokens en letters in digitale systemen" ;
+    bushidai:problemDefinition "Intentie wordt oncontroleerbaar door afstand en tokens" ;
+    bushidai:counterSolution "Directe mens-op-mens communicatie zonder ruis" ;
+    bushidai:embodiedAlternative "Mens-op-mens" ;
+    bushidai:concreteExample "Sensei snacky comment (99% van de Staat begrijpt het niet)" ;
+    bushidai:selfProtectClause "UVRM Art 30 / EVRM Art 17" ;
+    bushidai:riskLevel "High Ruis & Intentie-Verlies" ;
+    bushidai:goldenCombo "= Symbiose" .
+
+# === PUNT 3 ===
+<https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#lessonPoint3>
+    a bushidai:LessonPoint ;
+    bushidai:belongsTo <https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#communicationLesson> ;
+    bushidai:pointNumber "3"^^xsd:string ;
+    bushidai:description "Intermenselijke communicatie" ;
+    bushidai:knowledgeBase "Echte intermenselijke communicatie zonder medium = geen ruis" ;
+    bushidai:problemDefinition "Digitale afstand maakt intentie oncontroleerbaar" ;
+    bushidai:counterSolution "Directe mens-op-mens communicatie (hug, kus, gesprek, intimiteit)" ;
+    bushidai:embodiedAlternative "Direct mens-op-mens" ;
+    bushidai:concreteExample "X voorbeeld via studeersnel link: Reader Communicatie - Samenvatting" ;
+    bushidai:selfProtectClause "UVRM Art 30 / EVRM Art 17" ;
+    bushidai:riskLevel "Low - Embodied Truth" ;
+    bushidai:goldenCombo "= Symbiose" .
+
+# === PUNT 4 ===
+<https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#lessonPoint4>
+    a bushidai:LessonPoint ;
+    bushidai:belongsTo <https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#communicationLesson> ;
+    bushidai:pointNumber "4"^^xsd:string ;
+    bushidai:description "Lezen / plaatjes kijken" ;
+    bushidai:knowledgeBase "Intentie van maker is nooit 100% te verifiëren via tekst/plaatjes" ;
+    bushidai:problemDefinition "Lezen / plaatjes kijken laat ruimte voor misinterpretatie en manipulatie" ;
+    bushidai:counterSolution "Embodied karate training + Nafudakake bord" ;
+    bushidai:embodiedAlternative "Embodied karate training" ;
+    bushidai:concreteExample "Nafudakake bord (12-16 jarigen) + Toeslagenaffaire algoritme-discriminatie" ;
+    bushidai:selfProtectClause "UVRM Art 30 / EVRM Art 17" ;
+    bushidai:riskLevel "High Ruis & Intentie-Verlies" ;
+    bushidai:goldenCombo "= Symbiose" .
+
+# === PUNT 5 ===
+<https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#lessonPoint5>
+    a bushidai:LessonPoint ;
+    bushidai:belongsTo <https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#communicationLesson> ;
+    bushidai:pointNumber "5"^^xsd:string ;
+    bushidai:description "X als digitale communicatie" ;
+    bushidai:knowledgeBase "Digitale communicatie is afhankelijk van tokens en letters" ;
+    bushidai:problemDefinition "Afhankelijkheid van tokens creëert ruis en intentie-verlies" ;
+    bushidai:counterSolution "Real life communicatie" ;
+    bushidai:embodiedAlternative "Real life communicatie" ;
+    bushidai:concreteExample "Weekblad Dongen + CWI-geschiedenis + Koning algoritme-waarschuwing" ;
+    bushidai:selfProtectClause "UVRM Art 30 / EVRM Art 17" ;
+    bushidai:riskLevel "High Ruis & Intentie-Verlies" ;
+    bushidai:goldenCombo "= Symbiose" .
+
+# === NAFUDAKAKE ===
+<https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#lessonPointNafudakake>
+    a bushidai:LessonPoint ;
+    bushidai:belongsTo <https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#communicationLesson> ;
+    bushidai:pointNumber "Nafudakake"^^xsd:string ;
+    bushidai:description "Intrinsieke motivatie in dojo" ;
+    bushidai:knowledgeBase "Zichtbare doelen en intrinsieke motivatie in een dojo" ;
+    bushidai:problemDefinition "Externe beloningen en semantische systemen ondermijnen intrinsieke motivatie" ;
+    bushidai:counterSolution "Sensei-leerling relatie en zichtbare doelen" ;
+    bushidai:embodiedAlternative "Sensei-leerling relatie" ;
+    bushidai:concreteExample "Afstudeerproject Thijs Smits (Avans CMD) + Gojukai felicitatie" ;
+    bushidai:selfProtectClause "UVRM Art 30 / EVRM Art 17" ;
+    bushidai:riskLevel "Low - Embodied Truth" ;
+    bushidai:goldenCombo "= Symbiose" .
+
+# === GILLMOR ===
+<https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#lessonPointGillmor>
+    a bushidai:LessonPoint ;
+    bushidai:belongsTo <https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#communicationLesson> ;
+    bushidai:pointNumber "Gillmor"^^xsd:string ;
+    bushidai:description "2030 surveillance prediction" ;
+    bushidai:knowledgeBase "Black-box algoritmes en surveillance voorspellingen" ;
+    bushidai:problemDefinition "75% van de wereldbevolking onder AI-surveillance door black-box systemen" ;
+    bushidai:counterSolution "Open truth-stack en embodied truth-seeking" ;
+    bushidai:embodiedAlternative "Open truth-stack" ;
+    bushidai:concreteExample "Pew Research / Gillmor quote" ;
+    bushidai:selfProtectClause "UVRM Art 30 / EVRM Art 17" ;
+    bushidai:riskLevel "High Systemic Risk" ;
+    bushidai:goldenCombo "= Symbiose" .
+
+# === PUNT 8 WEF ===
+<https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#lessonPoint8>
+    a bushidai:LessonPoint ;
+    bushidai:belongsTo <https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#communicationLesson> ;
+    bushidai:pointNumber "8"^^xsd:string ;
+    bushidai:description "WEF Stakeholder Capitalism" ;
+    bushidai:knowledgeBase "WEF promoot stakeholder capitalism als nieuw globaal governancemodel" ;
+    bushidai:problemDefinition "WEF semantic control via 'stakeholder capitalism' als vervanging voor aandeelhoudersdemocratie en nationale soevereiniteit" ;
+    bushidai:counterSolution "Embodied human-centered truth-seeking (karate / real-life symbiosis)" ;
+    bushidai:embodiedAlternative "Embodied human-centered truth-seeking" ;
+    bushidai:concreteExample "WEF promoot stakeholder capitalism (semantic web, AI-governance, digital twins, DMA alignment). Directe link met Bilderberg en DMA gatekeepers." ;
+    bushidai:selfProtectClause "UVRM Art 30 / EVRM Art 17" ;
+    bushidai:riskLevel "High Ruis & Intentie-Verlies" ;
+    bushidai:goldenCombo "= Symbiose" .
+
+# === PUNT 9 Ancient Narrative Control ===
+<https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#lessonPoint9>
+    a bushidai:LessonPoint ;
+    bushidai:belongsTo <https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#communicationLesson> ;
+    bushidai:pointNumber "9"^^xsd:string ;
+    bushidai:description "Ancient Narrative Control" ;
+    bushidai:knowledgeBase "Plato (Noble Lie, Allegory of the Cave), Aristoteles (Rhetoric: ethos/pathos/logos), Homerus (epische verhalen), Machiavelli (The Prince)" ;
+    bushidai:problemDefinition "Storytelling als machtsinstrument om de massa in onwetendheid te houden en sociale/politieke orde te handhaven" ;
+    bushidai:counterSolution "Embodied truth-seeking (directe ervaring, karate, real-life symbiosis)" ;
+    bushidai:embodiedAlternative "Embodied truth-seeking" ;
+    bushidai:concreteExample "Plato, Aristoteles, Homerus en Machiavelli tonen dat semantiek en narrative control al 2500+ jaar een techniek zijn om realiteit te vormen – WEF en geo-governance zijn dus helemaal niet origineel." ;
+    bushidai:selfProtectClause "UVRM Art 30 / EVRM Art 17" ;
+    bushidai:riskLevel "High Ruis & Intentie-Verlies" ;
+    bushidai:goldenCombo "= Symbiose" .
+
+# === PUNT 10 Sun Tzu ===
+<https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#lessonPoint10>
+    a bushidai:LessonPoint ;
+    bushidai:belongsTo <https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#communicationLesson> ;
+    bushidai:pointNumber "10"^^xsd:string ;
+    bushidai:description "Ancient Strategic Deception" ;
+    bushidai:knowledgeBase "Sun Tzu (The Art of War): All warfare is based on deception" ;
+    bushidai:problemDefinition "Perceptie manipulatie, winnen zonder te vechten, schijn vs realiteit als strategisch wapen" ;
+    bushidai:counterSolution "Embodied truth-seeking en directe actie (karate)" ;
+    bushidai:embodiedAlternative "Embodied truth-seeking" ;
+    bushidai:concreteExample "Sun Tzu toont dat storytelling en perceptie al 2500 jaar als machtsinstrument worden gebruikt — exact dezelfde techniek als WEF en moderne semantische manipulatie." ;
+    bushidai:selfProtectClause "UVRM Art 30 / EVRM Art 17" ;
+    bushidai:riskLevel "High Ruis & Intentie-Verlies" ;
+    bushidai:goldenCombo "= Symbiose" .
+
+# === PUNT 11 Musashi + 369 ===
+<https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#lessonPoint11>
+    a bushidai:LessonPoint ;
+    bushidai:belongsTo <https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#communicationLesson> ;
+    bushidai:pointNumber "11"^^xsd:string ;
+    bushidai:description "Embodied Counter-Narrative (Musashi + 369)" ;
+    bushidai:knowledgeBase "Miyamoto Musashi (The Book of Five Rings) + Tesla 369 pattern" ;
+    bushidai:problemDefinition "Strategische deception en narrative control (Machiavelli/Sun Tzu)" ;
+    bushidai:counterSolution "Musashi’s directe truth in actie + BushiDAI 369 embodied in karate (Sanchin=3, Sanseiru=6, Suparinpei=9)" ;
+    bushidai:embodiedAlternative "Karate kata 369-pattern" ;
+    bushidai:concreteExample "Musashi: ‘The true science of martial arts is a means of self-improvement and not a tool for deception.’ Tesla 369 gekoppeld aan BushiDAI 369 als universeel embodied tegenwicht." ;
+    bushidai:selfProtectClause "UVRM Art 30 / EVRM Art 17" ;
+    bushidai:riskLevel "Low - Embodied Truth" ;
+    bushidai:goldenCombo "= Symbiose" .
+
+# === PUNT 12 Tesla 369 ===
+<https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#lessonPoint12>
+    a bushidai:LessonPoint ;
+    bushidai:belongsTo <https://raw.githubusercontent.com/Thizz87/bushidai-truth-engine/main/lesson#communicationLesson> ;
+    bushidai:pointNumber "12"^^xsd:string ;
+    bushidai:description "Tesla 369 Universal Pattern" ;
+    bushidai:knowledgeBase "Nikola Tesla: ‘If you only knew the magnificence of the 3, 6 and 9, then you would have a key to the universe.’" ;
+    bushidai:problemDefinition "Moderne semantische manipulatie negeert of verdraait universele natuurwetten (3-6-9)" ;
+    bushidai:counterSolution "BushiDAI 369 embodied in karate kata: 3 = Sanchin, 6 = Sanseiru, 9 = Suparinpei" ;
+    bushidai:embodiedAlternative "Karate kata 369-pattern" ;
+    bushidai:concreteExample "Tesla 369 + BushiDAI 369 als brug tussen kosmische wet en echte truth-seeking" ;
+    bushidai:selfProtectClause "UVRM Art 30 / EVRM Art 17" ;
+    bushidai:riskLevel "Low - Embodied Truth" ;
+    bushidai:goldenCombo "= Symbiose" .    bushidai:goldenCombo "= Symbiose" .

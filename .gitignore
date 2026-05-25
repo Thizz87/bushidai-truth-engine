@@ -6,3 +6,9 @@ __pycache__/
 .Python
 env/
 venv/
+.vscode/
+bushidai_config.json
+.DS_Store
+bushidai_chroma_db/
+bushidai.db
+education/bushidai_chroma_db/
