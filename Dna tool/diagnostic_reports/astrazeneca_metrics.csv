@@ -1,0 +1,10 @@
+Metric Parameter Description,Calculated Core Value
+Target Vaccine Architecture,AstraZeneca
+Sequence Length (Bases),534
+Codon Adaptation Index (CAI),0.9139
+Genomic GC Content Ratio,53.75%
+Absolute Base Mismatches,3888
+Sequence Drift Percentage,100.00%
+2P Prefusion Footprint Present,NO
+Vulnerable GC Windows (<40%),0
+Identified Hazardous Motifs,6

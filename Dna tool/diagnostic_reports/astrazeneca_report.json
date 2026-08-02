@@ -1,0 +1,47 @@
+{
+    "vaccine_target": "AstraZeneca",
+    "sequence_length_nt": 534,
+    "metrics": {
+        "codon_adaptation_index_cai": 0.9139,
+        "total_gc_percentage": 53.75,
+        "mutational_base_mismatches": 3888,
+        "variant_drift_percentage": 100.0,
+        "prefusion_2p_present": "NO"
+    },
+    "anomalies": {
+        "thermodynamic_gc_drops_count": 0,
+        "degradation_motifs_count": 6,
+        "mapped_vulnerabilities": [
+            {
+                "position": 75,
+                "motif": "AATAAA",
+                "risk": "Canonical Polyadenylation Signal (Causes premature mRNA truncation)"
+            },
+            {
+                "position": 89,
+                "motif": "TTTTTT",
+                "risk": "Polyu-T Tracts (Triggers mechanical RNA Polymerase II termination)"
+            },
+            {
+                "position": 90,
+                "motif": "TTTTTT",
+                "risk": "Polyu-T Tracts (Triggers mechanical RNA Polymerase II termination)"
+            },
+            {
+                "position": 299,
+                "motif": "AAAAAA",
+                "risk": "Internal Poly-A Slip Site (Induces structural translation frame-shifting)"
+            },
+            {
+                "position": 300,
+                "motif": "AAAAAA",
+                "risk": "Internal Poly-A Slip Site (Induces structural translation frame-shifting)"
+            },
+            {
+                "position": 225,
+                "motif": "CAGGTAAG",
+                "risk": "Consensus 5' Splice Site (Creates severe unintended splice variants)"
+            }
+        ]
+    }
+}

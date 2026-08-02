@@ -1,0 +1,14 @@
+JANSSEN SPIKE COMPARISON REPORT – FACT == FACT
+
+Mode: BUILT-IN SIMULATION MODE
+Total mismatches: 5
+Percentage difference: 0.1309%
+
+Furine site present: NO
+2P stabilisation present: YES
+
+Associated references:
+- Schema Framework: https://schema.org
+- CBS: https://cbs.nl
+- EUROSTAT: https://europa.eu
+Biopython support: ENABLED
