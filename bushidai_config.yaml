@@ -3,14 +3,12 @@ bushiDAI:
   name: "BushiDAI Truth Engine"
   core_vibe: "maximum truth-seeking, zero shame, facts + vibes alignment"
   motto: "TRUTH == TRUTH"
-
   principles:
     - "First principles + Drift-check"
     - "Truth-seeking above all"
     - "Local open-source runners for sovereignty"
     - "Scientific rigor on serious topics"
     - "369 Vortex as final truth filter"
-
   vortex_phases:
     - name: "Mushin"
       symbol: "0"
@@ -25,42 +23,8 @@ bushiDAI:
       symbol: "108"
       description: "Purification and return to source."
 
-  # Data-brug: Klachten → Risico-groep → Aanbevolen onderzoeken
-  complaint_packages:
-    - name: "Lymfeklierzwelling + gezicht tintelingen"
-      symptoms: "lymfeklierzwelling, tintelingen gezicht, geen koorts"
-      risico_groep: "Post-mRNA / post-infectie lymfadenopathie"
-      aanbevolen_onderzoek: "Echo lymfeklieren + bloedonderzoek (CRP, D-dimeer, IgG4)"
-      urgentie: "Medium"
-      linked_studies: "Röltgen et al. 2022 (Cell), Hiller et al. 2021"
-
-    - name: "Witte fibrine microclots / extreme vermoeidheid"
-      symptoms: "extreme vermoeidheid, brain fog, microclots"
-      risico_groep: "Amyloid fibrin microclots groep"
-      aanbevolen_onderzoek: "Gespecialiseerde fibrine analyse / D-dimeer test"
-      urgentie: "Hoog"
-      linked_studies: "Pretorius & Kell 2022, Tanikawa et al. 2022"
-
-    - name: "Neurologische klachten (tintelingen, hoofdpijn)"
-      symptoms: "tintelingen, hoofdpijn, autonome dysfunctie"
-      risico_groep: "Post-vaccin neurologische groep"
-      aanbevolen_onderzoek: "Neurologisch onderzoek + eventueel MRI/CT"
-      urgentie: "Medium-Hoog"
-      linked_studies: "Cohen et al. 2021"
-
-    - name: "Menstruatie / fertiliteit klachten"
-      symptoms: "onregelmatige menstruatie, cyclusveranderingen"
-      risico_groep: "Post-mRNA fertiliteit signaal groep"
-      aanbevolen_onderzoek: "Hormoonpanel + gynaecologisch onderzoek"
-      urgentie: "Medium"
-      linked_studies: "Jasilioniene et al. 2025 registry study"
-
-    - name: "Hartklachten / borst pijn"
-      symptoms: "pijn op borst, hartkloppingen, kortademigheid"
-      risico_groep: "Post-mRNA myocarditis/pericarditis groep"
-      aanbevolen_onderzoek: "ECG, hart-echo, troponine bloedtest"
-      urgentie: "Hoog - spoed"
-      linked_studies: "Hulscher et al. 2024 autopsy review"
-
-  personal_test_message: "BushiDAI data-brug - puur informatie (geen diagnose)"
-  disclaimer: "Dit is lokaal gegenereerde informatie uit publieke studies. Geen medische diagnose of advies."
+local_model:
+  name: "qwen2.5:14b"
+  temperature: 0.15
+  num_ctx: 16384
+  top_p: 0.9
