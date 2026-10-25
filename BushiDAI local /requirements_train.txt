@@ -1,0 +1,9 @@
+# requirements_train.txt
+# Extra packages voor dataset conversie + training
+
+datasets>=2.18.0
+unsloth
+trl
+transformers
+torch
+pyyaml

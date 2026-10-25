@@ -1,0 +1,374 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Anna de Vries",
+      "username": "anna.devries",
+      "email": "anna.devries@voorbeeld.nl",
+      "address": {
+        "street": "Prinsengracht",
+        "suite": "112",
+        "city": "Amsterdam",
+        "zipcode": "1015 EA",
+        "geo": { "lat": "52.3738", "lng": "4.8833" }
+      },
+      "phone": "06-11223344",
+      "website": "annadevries.nl",
+      "company": {
+        "name": "De Vries Media",
+        "catchPhrase": "Duidelijke verhalen voor iedereen",
+        "bs": "content en communicatie"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Bram Jansen",
+      "username": "bram.jansen",
+      "email": "bram.jansen@voorbeeld.nl",
+      "address": {
+        "street": "Oudegracht",
+        "suite": "88",
+        "city": "Utrecht",
+        "zipcode": "3511 AD",
+        "geo": { "lat": "52.0907", "lng": "5.1214" }
+      },
+      "phone": "06-22334455",
+      "website": "bramjansen.nl",
+      "company": {
+        "name": "Jansen Software",
+        "catchPhrase": "Eenvoudige tools die werken",
+        "bs": "webapps en API's"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Carmen Bakker",
+      "username": "carmen.bakker",
+      "email": "carmen.bakker@voorbeeld.nl",
+      "address": {
+        "street": "Parade",
+        "suite": "4",
+        "city": "'s-Hertogenbosch",
+        "zipcode": "5211 KL",
+        "geo": { "lat": "51.6889", "lng": "5.3030" }
+      },
+      "phone": "06-33445566",
+      "website": "carmenbakker.nl",
+      "company": {
+        "name": "Bakker Design",
+        "catchPhrase": "Vorm die je meteen snapt",
+        "bs": "huisstijl en interfaces"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Daan Visser",
+      "username": "daan.visser",
+      "email": "daan.visser@voorbeeld.nl",
+      "address": {
+        "street": "Heuvelstraat",
+        "suite": "19",
+        "city": "Tilburg",
+        "zipcode": "5038 AA",
+        "geo": { "lat": "51.5555", "lng": "5.0913" }
+      },
+      "phone": "06-44556677",
+      "website": "daanvisser.nl",
+      "company": {
+        "name": "Visser Data",
+        "catchPhrase": "Cijfers zonder ruis",
+        "bs": "dashboards en rapportages"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Eva Smit",
+      "username": "eva.smit",
+      "email": "eva.smit@voorbeeld.nl",
+      "address": {
+        "street": "Hoge Ham",
+        "suite": "45",
+        "city": "Dongen",
+        "zipcode": "5104 JC",
+        "geo": { "lat": "51.6267", "lng": "4.9389" }
+      },
+      "phone": "06-55667788",
+      "website": "evasmit.nl",
+      "company": {
+        "name": "Smit Educatie",
+        "catchPhrase": "Leren in kleine stappen",
+        "bs": "cursussen en workshops"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Finn Meijer",
+      "username": "finn.meijer",
+      "email": "finn.meijer@voorbeeld.nl",
+      "address": {
+        "street": "Coolsingel",
+        "suite": "16",
+        "city": "Rotterdam",
+        "zipcode": "3011 AD",
+        "geo": { "lat": "51.9225", "lng": "4.4792" }
+      },
+      "phone": "06-66778899",
+      "website": "finnmeijer.nl",
+      "company": {
+        "name": "Meijer Logistiek",
+        "catchPhrase": "Op tijd, zonder gedoe",
+        "bs": "planning en transport"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Guusje Hendriks",
+      "username": "guusje.hendriks",
+      "email": "guusje.hendriks@voorbeeld.nl",
+      "address": {
+        "street": "Grote Markt",
+        "suite": "7B",
+        "city": "Breda",
+        "zipcode": "4811 XM",
+        "geo": { "lat": "51.5889", "lng": "4.7760" }
+      },
+      "phone": "06-77889900",
+      "website": "guusjehendriks.nl",
+      "company": {
+        "name": "Hendriks Horeca",
+        "catchPhrase": "Goede koffie, rustige service",
+        "bs": "café en catering"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Hugo Peters",
+      "username": "hugo.peters",
+      "email": "hugo.peters@voorbeeld.nl",
+      "address": {
+        "street": "Stratumseind",
+        "suite": "31",
+        "city": "Eindhoven",
+        "zipcode": "5611 EN",
+        "geo": { "lat": "51.4361", "lng": "5.4800" }
+      },
+      "phone": "06-88990011",
+      "website": "hugopeters.nl",
+      "company": {
+        "name": "Peters Tech",
+        "catchPhrase": "Techniek die je uitlegt",
+        "bs": "hardware en support"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Iris van den Berg",
+      "username": "iris.vandenberg",
+      "email": "iris.vandenberg@voorbeeld.nl",
+      "address": {
+        "street": "Lange Voorhout",
+        "suite": "14",
+        "city": "Den Haag",
+        "zipcode": "2514 EE",
+        "geo": { "lat": "52.0830", "lng": "4.3140" }
+      },
+      "phone": "06-99001122",
+      "website": "irisvandenberg.nl",
+      "company": {
+        "name": "Van den Berg Advies",
+        "catchPhrase": "Eerst luisteren, dan plannen",
+        "bs": "beleid en organisatie"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Joris Mulder",
+      "username": "joris.mulder",
+      "email": "joris.mulder@voorbeeld.nl",
+      "address": {
+        "street": "Kaatsheuvelseweg",
+        "suite": "2",
+        "city": "Kaatsheuvel",
+        "zipcode": "5171 PN",
+        "geo": { "lat": "51.6610", "lng": "5.0380" }
+      },
+      "phone": "06-00112233",
+      "website": "jorismulder.nl",
+      "company": {
+        "name": "Mulder Film",
+        "catchPhrase": "Beeld dat het verhaal draagt",
+        "bs": "video en multimedia"
+      }
+    }
+  ],
+  "posts": [
+    { "id": 1, "userId": 1, "title": "Eerste blog: waarom ik schrijf", "body": "Ik schrijf om ingewikkelde onderwerpen klein te maken. In deze lespost zie je hoe een titel, een body en een userId bij elkaar horen." },
+    { "id": 2, "userId": 1, "title": "Drie regels voor heldere tekst", "body": "Korte zinnen. Eén punt per alinea. Geen vaktermen zonder uitleg. Dat is genoeg om een post te begrijpen." },
+    { "id": 3, "userId": 1, "title": "Werken met JSON in de browser", "body": "Met fetch haal je dit bericht op. Daarna kun je title en body in HTML zetten. Dat is de kern van deze oefening." },
+    { "id": 4, "userId": 1, "title": "Amsterdam als voorbeeldstad", "body": "Anna woont aan de Prinsengracht. Haar posts gaan over media en uitleg. Filter posts op userId=1 om alleen haar werk te zien." },
+    { "id": 5, "userId": 2, "title": "Een API is een afspraak", "body": "Een endpoint belooft een vorm. /users geeft personen. /posts geeft berichten. Als de vorm vaststaat, kun je oefenen." },
+    { "id": 6, "userId": 2, "title": "GET, POST, PUT, DELETE", "body": "GET leest. POST maakt. PUT vervangt. DELETE verwijdert. In json-server werken deze werkwoorden op deze dataset." },
+    { "id": 7, "userId": 2, "title": "Querystrings uitleggen", "body": "Met ?userId=2 krijg je alleen de posts van Bram. Dat is filteren. Handig om relaties te laten zien." },
+    { "id": 8, "userId": 2, "title": "Fouten zijn lesmateriaal", "body": "Een 404 betekent: dit id bestaat niet. Laat leerlingen /posts/999 proberen en de statuscode lezen." },
+    { "id": 9, "userId": 3, "title": "Kleur en rust in een interface", "body": "Carmen ontwerpt schermen. Deze post is een voorbeeld van content die bij een designer past." },
+    { "id": 10, "userId": 3, "title": "Kaarten in plaats van tabellen", "body": "Voor beginners is een kaart per user overzichtelijker dan een kale JSON-dump. Toon name, city en company.name." },
+    { "id": 11, "userId": 3, "title": "Den Bosch op de kaart", "body": "Geo-coördinaten staan bij elk adres. Je kunt ze later in een kaart zetten, maar dat hoeft niet in les 1." },
+    { "id": 12, "userId": 3, "title": "Contrast is geen extraatje", "body": "Tekst moet leesbaar blijven. Placeholder-data helpt om layout te testen zonder echte klanten." },
+    { "id": 13, "userId": 4, "title": "Wat is een dashboard?", "body": "Een dashboard telt dingen: aantal posts, openstaande todos, comments per bericht. Deze dataset is klein genoeg om te tellen." },
+    { "id": 14, "userId": 4, "title": "Gemiddelden oefenen", "body": "Tel het aantal todos per user. Tel hoeveel er completed true zijn. Dat is een eenvoudige les in filteren." },
+    { "id": 15, "userId": 4, "title": "Tilburg en data", "body": "Daan werkt met rapportages. Zijn posts blijven bij cijfers en uitleg, zodat het thema per user logisch blijft." },
+    { "id": 16, "userId": 4, "title": "CSV versus JSON", "body": "JSON is genest. CSV is plat. Voor adressen met geo is JSON handiger. Dat verschil kun je in de les benoemen." },
+    { "id": 17, "userId": 5, "title": "Les 1: wat is een user?", "body": "Een user heeft een id, een naam en contactgegevens. Alle andere resources wijzen naar dit id via userId." },
+    { "id": 18, "userId": 5, "title": "Les 2: relaties tekenen", "body": "Teken user 5 in het midden. Verbind posts, albums en todos. Dan zie je waarom ids consistent moeten zijn." },
+    { "id": 19, "userId": 5, "title": "Les 3: Dongen als voorbeeld", "body": "Eva woont in Dongen. Haar bedrijf heet Smit Educatie. Gebruik haar record als eerste voorbeeld in de klas." },
+    { "id": 20, "userId": 5, "title": "Les 4: niet random, wel nep", "body": "De data is verzonnen, maar de velden kloppen met elkaar. Dat is het verschil met de originele JSONPlaceholder." },
+    { "id": 21, "userId": 6, "title": "Van bestelling naar bezorging", "body": "Finn plant ritten. Een todo kan zijn: route controleren. Een post kan de uitleg zijn. Zelfde persoon, andere resource." },
+    { "id": 22, "userId": 6, "title": "Statusvelden lezen", "body": "Todos hebben completed true of false. Dat is een boolean. Handig om if/else te oefenen." },
+    { "id": 23, "userId": 6, "title": "Rotterdam en havens", "body": "De stad in het adres is herkenbaar. Daardoor blijft de JSON geen willekeurige letters." },
+    { "id": 24, "userId": 6, "title": "Tijd en volgorde", "body": "Ids lopen op. Dat is geen datum, maar het helpt om records te ordenen." },
+    { "id": 25, "userId": 7, "title": "Menu van de week", "body": "Guusje schrijft over horeca. Deze post kun je tonen naast haar company.catchPhrase." },
+    { "id": 26, "userId": 7, "title": "Reserveren via een formulier", "body": "Een POST naar /posts simuleert een nieuw bericht. De server geeft het object terug met een nieuw id." },
+    { "id": 27, "userId": 7, "title": "Breda op een rustige ochtend", "body": "Korte sfeertekst. Goed om innerText versus innerHTML uit te leggen: hier is geen HTML nodig." },
+    { "id": 28, "userId": 7, "title": "Allergenen en labels", "body": "Velden moeten voorspelbaar heten. Daarom heet het overal zipcode en niet soms postcode." },
+    { "id": 29, "userId": 8, "title": "Wat doet een endpoint?", "body": "Hugo legt techniek uit. /users/8 is één persoon. /posts?userId=8 zijn zijn berichten." },
+    { "id": 30, "userId": 8, "title": "JSON netjes indenteren", "body": "Leesbaarheid telt. In de les: plak een record in een formatter en benoem elk veld." },
+    { "id": 31, "userId": 8, "title": "Eindhoven en hardware", "body": "Peters Tech past bij deze user. Bedrijfsnaam en posts houden hetzelfde thema." },
+    { "id": 32, "userId": 8, "title": "Cors voor beginners", "body": "json-server op localhost laat fetch vanuit een HTML-bestand toe. Handig voor de eerste les." },
+    { "id": 33, "userId": 9, "title": "Een plan op één A4", "body": "Iris schrijft advies. Haar posts zijn langer nadenken, geen willekeurige zinnen." },
+    { "id": 34, "userId": 9, "title": "Vragen stellen aan data", "body": "Wie woont in Den Haag? Filter address.city. Wie heeft todos open? Filter completed=false." },
+    { "id": 35, "userId": 9, "title": "Beleid in gewone taal", "body": "Een catchPhrase is een slogan. Een bs-veld is het werkterrein. Beide staan onder company." },
+    { "id": 36, "userId": 9, "title": "Den Haag en overleg", "body": "Adres, telefoon en website horen bij dezelfde persoon. Check dat hardop in de les." },
+    { "id": 37, "userId": 10, "title": "Eerste shot van de dag", "body": "Joris maakt film. Deze post hoort bij Mulder Film in Kaatsheuvel." },
+    { "id": 38, "userId": 10, "title": "Shotlijst als todo-lijst", "body": "Todos kunnen een draaiboek zijn. Completed true betekent: deze shot staat in de bus." },
+    { "id": 39, "userId": 10, "title": "Album versus post", "body": "Een album groepeert foto's. Een post is tekst. Allebei wijzen naar dezelfde userId." },
+    { "id": 40, "userId": 10, "title": "Kaatsheuvel in beeld", "body": "Dorpen mogen. Het punt is herkenbaarheid, niet alleen grote steden." }
+  ],
+  "comments": [
+    { "id": 1, "postId": 1, "name": "Reactie van Bram Jansen", "email": "bram.jansen@voorbeeld.nl", "body": "Heldere start. De koppeling met userId is meteen duidelijk." },
+    { "id": 2, "postId": 1, "name": "Reactie van Eva Smit", "email": "eva.smit@voorbeeld.nl", "body": "Dit is bruikbaar als eerste voorbeeld in de les." },
+    { "id": 3, "postId": 5, "name": "Reactie van Anna de Vries", "email": "anna.devries@voorbeeld.nl", "body": "Mooi dat GET en de andere werkwoorden apart staan." },
+    { "id": 4, "postId": 5, "name": "Reactie van Hugo Peters", "email": "hugo.peters@voorbeeld.nl", "body": "Ik zou hier een schemaatje van de routes bij zetten." },
+    { "id": 5, "postId": 9, "name": "Reactie van Daan Visser", "email": "daan.visser@voorbeeld.nl", "body": "Kaarten tellen is inderdaad overzichtelijker voor beginners." },
+    { "id": 6, "postId": 13, "name": "Reactie van Finn Meijer", "email": "finn.meijer@voorbeeld.nl", "body": "Tellen van todos is een goede tweede opdracht." },
+    { "id": 7, "postId": 17, "name": "Reactie van Carmen Bakker", "email": "carmen.bakker@voorbeeld.nl", "body": "User 5 als startpunt werkt. Dongen is herkenbaar." },
+    { "id": 8, "postId": 17, "name": "Reactie van Joris Mulder", "email": "joris.mulder@voorbeeld.nl", "body": "De tekening van relaties zou ik als homework geven." },
+    { "id": 9, "postId": 21, "name": "Reactie van Guusje Hendriks", "email": "guusje.hendriks@voorbeeld.nl", "body": "Boolean completed is een fijn klein lesdoel." },
+    { "id": 10, "postId": 25, "name": "Reactie van Iris van den Berg", "email": "iris.vandenberg@voorbeeld.nl", "body": "Thema per persoon klopt. Dat maakt de dataset logisch." },
+    { "id": 11, "postId": 29, "name": "Reactie van Bram Jansen", "email": "bram.jansen@voorbeeld.nl", "body": "Endpoint versus querystring: precies wat leerlingen door elkaar halen." },
+    { "id": 12, "postId": 33, "name": "Reactie van Eva Smit", "email": "eva.smit@voorbeeld.nl", "body": "Vragen stellen aan data is de kern van les 4." },
+    { "id": 13, "postId": 37, "name": "Reactie van Anna de Vries", "email": "anna.devries@voorbeeld.nl", "body": "Album en post naast elkaar zetten is een sterk onderscheid." },
+    { "id": 14, "postId": 40, "name": "Reactie van Carmen Bakker", "email": "carmen.bakker@voorbeeld.nl", "body": "Fijn dat er ook een dorp in zit, niet alleen steden." },
+    { "id": 15, "postId": 2, "name": "Reactie van Hugo Peters", "email": "hugo.peters@voorbeeld.nl", "body": "Drie regels tekst: dat hang ik boven het bord." },
+    { "id": 16, "postId": 6, "name": "Reactie van Daan Visser", "email": "daan.visser@voorbeeld.nl", "body": "Laat ze /posts/999 doen. Statuscode lezen hoort erbij." },
+    { "id": 17, "postId": 18, "name": "Reactie van Finn Meijer", "email": "finn.meijer@voorbeeld.nl", "body": "Relaties tekenen voorkomt later gedoe met join-logica." },
+    { "id": 18, "postId": 22, "name": "Reactie van Guusje Hendriks", "email": "guusje.hendriks@voorbeeld.nl", "body": "true en false hardop laten voorlezen werkt verrassend goed." },
+    { "id": 19, "postId": 30, "name": "Reactie van Iris van den Berg", "email": "iris.vandenberg@voorbeeld.nl", "body": "Formatteren van JSON is een onderschatte vaardigheid." },
+    { "id": 20, "postId": 38, "name": "Reactie van Joris Mulder", "email": "joris.mulder@voorbeeld.nl", "body": "Shotlijst als todos: dat voorbeeld neem ik over." }
+  ],
+  "albums": [
+    { "id": 1, "userId": 1, "title": "Schrijven in Amsterdam" },
+    { "id": 2, "userId": 1, "title": "Redactie op kantoor" },
+    { "id": 3, "userId": 2, "title": "Code in Utrecht" },
+    { "id": 4, "userId": 2, "title": "API-schetsen" },
+    { "id": 5, "userId": 3, "title": "Ontwerpstad Den Bosch" },
+    { "id": 6, "userId": 3, "title": "Kleuren en rasters" },
+    { "id": 7, "userId": 4, "title": "Dashboards Tilburg" },
+    { "id": 8, "userId": 4, "title": "Grafieken voor de les" },
+    { "id": 9, "userId": 5, "title": "Leslokaal Dongen" },
+    { "id": 10, "userId": 5, "title": "Werkbladen en borden" },
+    { "id": 11, "userId": 6, "title": "Haven en routes" },
+    { "id": 12, "userId": 6, "title": "Magazijn Rotterdam" },
+    { "id": 13, "userId": 7, "title": "Keuken Breda" },
+    { "id": 14, "userId": 7, "title": "Terras op de Markt" },
+    { "id": 15, "userId": 8, "title": "Werkplaats Eindhoven" },
+    { "id": 16, "userId": 8, "title": "Onderdelen en tools" },
+    { "id": 17, "userId": 9, "title": "Overleg Den Haag" },
+    { "id": 18, "userId": 9, "title": "Notities en plattegronden" },
+    { "id": 19, "userId": 10, "title": "Set in Kaatsheuvel" },
+    { "id": 20, "userId": 10, "title": "Licht en camera" }
+  ],
+  "photos": [
+    { "id": 1, "albumId": 1, "title": "Gracht bij ochtendlicht", "url": "https://picsum.photos/id/1015/600/400", "thumbnailUrl": "https://picsum.photos/id/1015/150/150" },
+    { "id": 2, "albumId": 1, "title": "Brug en fietsen", "url": "https://picsum.photos/id/1016/600/400", "thumbnailUrl": "https://picsum.photos/id/1016/150/150" },
+    { "id": 3, "albumId": 2, "title": "Bureau met kladblok", "url": "https://picsum.photos/id/1018/600/400", "thumbnailUrl": "https://picsum.photos/id/1018/150/150" },
+    { "id": 4, "albumId": 2, "title": "Kop koffie naast laptop", "url": "https://picsum.photos/id/1020/600/400", "thumbnailUrl": "https://picsum.photos/id/1020/150/150" },
+    { "id": 5, "albumId": 3, "title": "Oudegracht vanaf de brug", "url": "https://picsum.photos/id/1024/600/400", "thumbnailUrl": "https://picsum.photos/id/1024/150/150" },
+    { "id": 6, "albumId": 3, "title": "Werken in de trein", "url": "https://picsum.photos/id/1025/600/400", "thumbnailUrl": "https://picsum.photos/id/1025/150/150" },
+    { "id": 7, "albumId": 4, "title": "Schema op papier", "url": "https://picsum.photos/id/1027/600/400", "thumbnailUrl": "https://picsum.photos/id/1027/150/150" },
+    { "id": 8, "albumId": 4, "title": "Terminal met JSON", "url": "https://picsum.photos/id/1031/600/400", "thumbnailUrl": "https://picsum.photos/id/1031/150/150" },
+    { "id": 9, "albumId": 5, "title": "Markt en gevels", "url": "https://picsum.photos/id/1036/600/400", "thumbnailUrl": "https://picsum.photos/id/1036/150/150" },
+    { "id": 10, "albumId": 5, "title": "Schetsboek open", "url": "https://picsum.photos/id/1037/600/400", "thumbnailUrl": "https://picsum.photos/id/1037/150/150" },
+    { "id": 11, "albumId": 6, "title": "Kleurstalen", "url": "https://picsum.photos/id/1039/600/400", "thumbnailUrl": "https://picsum.photos/id/1039/150/150" },
+    { "id": 12, "albumId": 6, "title": "Raster op het scherm", "url": "https://picsum.photos/id/1041/600/400", "thumbnailUrl": "https://picsum.photos/id/1041/150/150" },
+    { "id": 13, "albumId": 7, "title": "Grafiek op monitor", "url": "https://picsum.photos/id/1043/600/400", "thumbnailUrl": "https://picsum.photos/id/1043/150/150" },
+    { "id": 14, "albumId": 7, "title": "Notities met cijfers", "url": "https://picsum.photos/id/1044/600/400", "thumbnailUrl": "https://picsum.photos/id/1044/150/150" },
+    { "id": 15, "albumId": 8, "title": "Lesbord met stappen", "url": "https://picsum.photos/id/1047/600/400", "thumbnailUrl": "https://picsum.photos/id/1047/150/150" },
+    { "id": 16, "albumId": 8, "title": "Print van een tabel", "url": "https://picsum.photos/id/1048/600/400", "thumbnailUrl": "https://picsum.photos/id/1048/150/150" },
+    { "id": 17, "albumId": 9, "title": "Straat in Dongen", "url": "https://picsum.photos/id/1049/600/400", "thumbnailUrl": "https://picsum.photos/id/1049/150/150" },
+    { "id": 18, "albumId": 9, "title": "Lokaal klaarzetten", "url": "https://picsum.photos/id/1050/600/400", "thumbnailUrl": "https://picsum.photos/id/1050/150/150" },
+    { "id": 19, "albumId": 10, "title": "Werkblad close-up", "url": "https://picsum.photos/id/1051/600/400", "thumbnailUrl": "https://picsum.photos/id/1051/150/150" },
+    { "id": 20, "albumId": 10, "title": "Stiften en papier", "url": "https://picsum.photos/id/1052/600/400", "thumbnailUrl": "https://picsum.photos/id/1052/150/150" },
+    { "id": 21, "albumId": 11, "title": "Kade en kranen", "url": "https://picsum.photos/id/1053/600/400", "thumbnailUrl": "https://picsum.photos/id/1053/150/150" },
+    { "id": 22, "albumId": 11, "title": "Vrachtwagen klaar", "url": "https://picsum.photos/id/1054/600/400", "thumbnailUrl": "https://picsum.photos/id/1054/150/150" },
+    { "id": 23, "albumId": 12, "title": "Stellingen in het magazijn", "url": "https://picsum.photos/id/1055/600/400", "thumbnailUrl": "https://picsum.photos/id/1055/150/150" },
+    { "id": 24, "albumId": 12, "title": "Pakbon controleren", "url": "https://picsum.photos/id/1056/600/400", "thumbnailUrl": "https://picsum.photos/id/1056/150/150" },
+    { "id": 25, "albumId": 13, "title": "Keuken voor opening", "url": "https://picsum.photos/id/1057/600/400", "thumbnailUrl": "https://picsum.photos/id/1057/150/150" },
+    { "id": 26, "albumId": 13, "title": "Bord met soep", "url": "https://picsum.photos/id/1058/600/400", "thumbnailUrl": "https://picsum.photos/id/1058/150/150" },
+    { "id": 27, "albumId": 14, "title": "Terrasstoelen", "url": "https://picsum.photos/id/1059/600/400", "thumbnailUrl": "https://picsum.photos/id/1059/150/150" },
+    { "id": 28, "albumId": 14, "title": "Koffie op de Markt", "url": "https://picsum.photos/id/1060/600/400", "thumbnailUrl": "https://picsum.photos/id/1060/150/150" },
+    { "id": 29, "albumId": 15, "title": "Werkbank", "url": "https://picsum.photos/id/1061/600/400", "thumbnailUrl": "https://picsum.photos/id/1061/150/150" },
+    { "id": 30, "albumId": 15, "title": "Soldeerbout en printplaat", "url": "https://picsum.photos/id/1062/600/400", "thumbnailUrl": "https://picsum.photos/id/1062/150/150" },
+    { "id": 31, "albumId": 16, "title": "Doos met onderdelen", "url": "https://picsum.photos/id/1063/600/400", "thumbnailUrl": "https://picsum.photos/id/1063/150/150" },
+    { "id": 32, "albumId": 16, "title": "Multimeter", "url": "https://picsum.photos/id/1064/600/400", "thumbnailUrl": "https://picsum.photos/id/1064/150/150" },
+    { "id": 33, "albumId": 17, "title": "Vergadertafel", "url": "https://picsum.photos/id/1065/600/400", "thumbnailUrl": "https://picsum.photos/id/1065/150/150" },
+    { "id": 34, "albumId": 17, "title": "Documentenmap", "url": "https://picsum.photos/id/1066/600/400", "thumbnailUrl": "https://picsum.photos/id/1066/150/150" },
+    { "id": 35, "albumId": 18, "title": "Plattegrond van de stad", "url": "https://picsum.photos/id/1067/600/400", "thumbnailUrl": "https://picsum.photos/id/1067/150/150" },
+    { "id": 36, "albumId": 18, "title": "Agenda met notities", "url": "https://picsum.photos/id/1068/600/400", "thumbnailUrl": "https://picsum.photos/id/1068/150/150" },
+    { "id": 37, "albumId": 19, "title": "Camera op statief", "url": "https://picsum.photos/id/1069/600/400", "thumbnailUrl": "https://picsum.photos/id/1069/150/150" },
+    { "id": 38, "albumId": 19, "title": "Set met lampen", "url": "https://picsum.photos/id/1070/600/400", "thumbnailUrl": "https://picsum.photos/id/1070/150/150" },
+    { "id": 39, "albumId": 20, "title": "Close-up lens", "url": "https://picsum.photos/id/1071/600/400", "thumbnailUrl": "https://picsum.photos/id/1071/150/150" },
+    { "id": 40, "albumId": 20, "title": "Clapperboard", "url": "https://picsum.photos/id/1072/600/400", "thumbnailUrl": "https://picsum.photos/id/1072/150/150" }
+  ],
+  "todos": [
+    { "id": 1, "userId": 1, "title": "Concept voor blog 1 schrijven", "completed": true },
+    { "id": 2, "userId": 1, "title": "Tekst laten nalezen", "completed": true },
+    { "id": 3, "userId": 1, "title": "Titel inkorten tot één regel", "completed": false },
+    { "id": 4, "userId": 1, "title": "Voorbeeldzin toevoegen", "completed": false },
+    { "id": 5, "userId": 2, "title": "Routes op een blad zetten", "completed": true },
+    { "id": 6, "userId": 2, "title": "GET-voorbeeld testen", "completed": true },
+    { "id": 7, "userId": 2, "title": "POST-voorbeeld voorbereiden", "completed": false },
+    { "id": 8, "userId": 2, "title": "404-oefening maken", "completed": false },
+    { "id": 9, "userId": 3, "title": "Kaart-layout schetsen", "completed": true },
+    { "id": 10, "userId": 3, "title": "Kleuren kiezen", "completed": true },
+    { "id": 11, "userId": 3, "title": "Contrast controleren", "completed": false },
+    { "id": 12, "userId": 3, "title": "Mobiele weergave testen", "completed": false },
+    { "id": 13, "userId": 4, "title": "Aantal posts per user tellen", "completed": true },
+    { "id": 14, "userId": 4, "title": "Openstaande todos tellen", "completed": false },
+    { "id": 15, "userId": 4, "title": "Tabel naar grafiek zetten", "completed": false },
+    { "id": 16, "userId": 4, "title": "Lesopdracht cijfers schrijven", "completed": true },
+    { "id": 17, "userId": 5, "title": "Les 1 printen", "completed": true },
+    { "id": 18, "userId": 5, "title": "Relatietekening voorbereiden", "completed": true },
+    { "id": 19, "userId": 5, "title": "Dongen-voorbeeld op bord zetten", "completed": false },
+    { "id": 20, "userId": 5, "title": "Huiswerkopdracht filteren maken", "completed": false },
+    { "id": 21, "userId": 6, "title": "Route vanmorgen controleren", "completed": true },
+    { "id": 22, "userId": 6, "title": "Pakbonnen afvinken", "completed": true },
+    { "id": 23, "userId": 6, "title": "Nieuwe rit inplannen", "completed": false },
+    { "id": 24, "userId": 6, "title": "Status completed uitleggen", "completed": false },
+    { "id": 25, "userId": 7, "title": "Menu van de week schrijven", "completed": true },
+    { "id": 26, "userId": 7, "title": "Terras klaarzetten", "completed": false },
+    { "id": 27, "userId": 7, "title": "Allergenenlijst bijwerken", "completed": false },
+    { "id": 28, "userId": 7, "title": "Foto's keuken in album zetten", "completed": true },
+    { "id": 29, "userId": 8, "title": "Endpoint-lijst printen", "completed": true },
+    { "id": 30, "userId": 8, "title": "JSON formatteren in de les", "completed": false },
+    { "id": 31, "userId": 8, "title": "Demo localhost starten", "completed": true },
+    { "id": 32, "userId": 8, "title": "Onderdelen bestellen", "completed": false },
+    { "id": 33, "userId": 9, "title": "A4-plan maken", "completed": true },
+    { "id": 34, "userId": 9, "title": "Vragen bij de dataset schrijven", "completed": true },
+    { "id": 35, "userId": 9, "title": "City-filter oefenen", "completed": false },
+    { "id": 36, "userId": 9, "title": "Overleg voorbereiden", "completed": false },
+    { "id": 37, "userId": 10, "title": "Shotlijst afvinken", "completed": true },
+    { "id": 38, "userId": 10, "title": "Licht zetten", "completed": true },
+    { "id": 39, "userId": 10, "title": "Album Set in Kaatsheuvel vullen", "completed": false },
+    { "id": 40, "userId": 10, "title": "Eerste cut exporteren", "completed": false }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "kinderen": [
+    {
+      "id": 1,
+      "naam": "Liv de Vries",
+      "username": "liv",
+      "email": "liv@school.nl",
+      "stad": "Dongen",
+      "straat": "Kerkstraat 12",
+      "hobby": "tekenen",
+      "huisdier": "poes Minoes"
+    },
+    {
+      "id": 2,
+      "naam": "Noah Jansen",
+      "username": "noah",
+      "email": "noah@school.nl",
+      "stad": "Tilburg",
+      "straat": "Schoolstraat 8",
+      "hobby": "voetbal",
+      "huisdier": "hond Bommel"
+    },
+    {
+      "id": 3,
+      "naam": "Saar Bakker",
+      "username": "saar",
+      "email": "saar@school.nl",
+      "stad": "Breda",
+      "straat": "Parklaan 3",
+      "hobby": "dansen",
+      "huisdier": "konijn Knabbel"
+    },
+    {
+      "id": 4,
+      "naam": "Milan Visser",
+      "username": "milan",
+      "email": "milan@school.nl",
+      "stad": "Oosterhout",
+      "straat": "Molenweg 21",
+      "hobby": "gamen",
+      "huisdier": "vis Goudje"
+    },
+    {
+      "id": 5,
+      "naam": "Fien Smit",
+      "username": "fien",
+      "email": "fien@school.nl",
+      "stad": "Dongen",
+      "straat": "Hoge Ham 45",
+      "hobby": "paardrijden",
+      "huisdier": "pony Sterre"
+    },
+    {
+      "id": 6,
+      "naam": "Sem Meijer",
+      "username": "sem",
+      "email": "sem@school.nl",
+      "stad": "Kaatsheuvel",
+      "straat": "Bosweg 7",
+      "hobby": "voetbal",
+      "huisdier": "hamster Pim"
+    }
+  ],
+  "berichten": [
+    { "id": 1, "kindId": 1, "titel": "Mijn tekening van Minoes", "tekst": "Ik heb mijn poes getekend. Ze is oranje en slaapt graag." },
+    { "id": 2, "kindId": 1, "titel": "Kleurpotloden", "tekst": "Blauw en geel zijn mijn lievelingskleuren. Morgen teken ik een huis." },
+    { "id": 3, "kindId": 2, "titel": "Goal!", "tekst": "Ik heb gescoord bij voetbal. Bommel mocht daarna mee naar het park." },
+    { "id": 4, "kindId": 2, "titel": "Nieuwe schoenen", "tekst": "Mijn voetbalschoenen zijn zwart met groen. Ze passen goed." },
+    { "id": 5, "kindId": 3, "titel": "Dansles", "tekst": "We leerden een nieuwe stap. Knabbel keek toe vanuit zijn hok." },
+    { "id": 6, "kindId": 3, "titel": "Voorstelling", "tekst": "Zaterdag dansen we op het podium. Ik vind dat spannend en leuk." },
+    { "id": 7, "kindId": 4, "titel": "Hoogste score", "tekst": "Ik haalde mijn hoogste score. Daarna gaf ik Goudje te eten." },
+    { "id": 8, "kindId": 4, "titel": "Samen spelen", "tekst": "Sem kwam gamen. We wonnen samen een wedstrijd." },
+    { "id": 9, "kindId": 5, "titel": "Les op Sterre", "tekst": "Sterre stapte rustig. Ik poetste haar vacht na de les." },
+    { "id": 10, "kindId": 5, "titel": "Wortels meenemen", "tekst": "Pony's lusten wortels. Ik bewaar er twee in mijn tas." },
+    { "id": 11, "kindId": 6, "titel": "Training in de regen", "tekst": "Het regende, maar we speelden door. Pim zat droog thuis." },
+    { "id": 12, "kindId": 6, "titel": "Naar de Efteling kijken", "tekst": "Vanuit Kaatsheuvel zien we de Efteling. Dat vind ik stoer." }
+  ],
+  "reacties": [
+    { "id": 1, "berichtId": 1, "naam": "Fien", "tekst": "Mooie poes! Minoes lijkt lief." },
+    { "id": 2, "berichtId": 3, "naam": "Sem", "tekst": "Goed gedaan Noah. Bommel is cool." },
+    { "id": 3, "berichtId": 5, "naam": "Liv", "tekst": "Succes zaterdag Saar!" },
+    { "id": 4, "berichtId": 7, "naam": "Noah", "tekst": "Nice score Milan." },
+    { "id": 5, "berichtId": 9, "naam": "Saar", "tekst": "Sterre is een mooie naam." },
+    { "id": 6, "berichtId": 12, "naam": "Milan", "tekst": "De Efteling is te gek." }
+  ],
+  "albums": [
+    { "id": 1, "kindId": 1, "titel": "Tekeningen van Liv" },
+    { "id": 2, "kindId": 2, "titel": "Voetbal van Noah" },
+    { "id": 3, "kindId": 3, "titel": "Dans van Saar" },
+    { "id": 4, "kindId": 4, "titel": "Games van Milan" },
+    { "id": 5, "kindId": 5, "titel": "Pony Sterre" },
+    { "id": 6, "kindId": 6, "titel": "Sem op het veld" }
+  ],
+  "fotos": [
+    { "id": 1, "albumId": 1, "titel": "Poes Minoes", "url": "https://picsum.photos/id/40/400/300" },
+    { "id": 2, "albumId": 1, "titel": "Kleurdoos", "url": "https://picsum.photos/id/101/400/300" },
+    { "id": 3, "albumId": 2, "titel": "Voetbal op het gras", "url": "https://picsum.photos/id/88/400/300" },
+    { "id": 4, "albumId": 2, "titel": "Hond Bommel", "url": "https://picsum.photos/id/1025/400/300" },
+    { "id": 5, "albumId": 3, "titel": "Dansschoenen", "url": "https://picsum.photos/id/21/400/300" },
+    { "id": 6, "albumId": 3, "titel": "Konijn Knabbel", "url": "https://picsum.photos/id/169/400/300" },
+    { "id": 7, "albumId": 4, "titel": "Controller", "url": "https://picsum.photos/id/96/400/300" },
+    { "id": 8, "albumId": 4, "titel": "Kom Goudje", "url": "https://picsum.photos/id/106/400/300" },
+    { "id": 9, "albumId": 5, "titel": "Pony in de wei", "url": "https://picsum.photos/id/200/400/300" },
+    { "id": 10, "albumId": 5, "titel": "Zadel en helm", "url": "https://picsum.photos/id/201/400/300" },
+    { "id": 11, "albumId": 6, "titel": "Doel in het park", "url": "https://picsum.photos/id/28/400/300" },
+    { "id": 12, "albumId": 6, "titel": "Hamster Pim", "url": "https://picsum.photos/id/219/400/300" }
+  ],
+  "taken": [
+    { "id": 1, "kindId": 1, "titel": "Potloden slijpen", "klaar": true },
+    { "id": 2, "kindId": 1, "titel": "Tekening inleveren", "klaar": false },
+    { "id": 3, "kindId": 2, "titel": "Gymtas inpakken", "klaar": true },
+    { "id": 4, "kindId": 2, "titel": "Bommel uitlaten", "klaar": false },
+    { "id": 5, "kindId": 3, "titel": "Dansschoenen zoeken", "klaar": true },
+    { "id": 6, "kindId": 3, "titel": "Knabbel water geven", "klaar": false },
+    { "id": 7, "kindId": 4, "titel": "Huiswerk rekenen", "klaar": false },
+    { "id": 8, "kindId": 4, "titel": "Goudje voeren", "klaar": true },
+    { "id": 9, "kindId": 5, "titel": "Helm meenemen", "klaar": true },
+    { "id": 10, "kindId": 5, "titel": "Wortels snijden", "klaar": false },
+    { "id": 11, "kindId": 6, "titel": "Voetbalschoenen poetsen", "klaar": false },
+    { "id": 12, "kindId": 6, "titel": "Kooi van Pim schoonmaken", "klaar": true }
+  ]
+}

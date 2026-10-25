@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "naam": "John Doe",
+    "rol": "Burger",
+    "status": "Gecontroleerd"
+  },
+  {
+    "id": 2,
+    "naam": "Voer hier jouw eigen naam in",
+    "rol": "Leerling",
+    "status": "Geverifieerd",
+    "plaats": "Les"
+  },
+  {
+    "id": 3,
+    "naam": "Jane Doe",
+    "rol": "Burger",
+    "status": "Gecontroleerd"
+  }
+]

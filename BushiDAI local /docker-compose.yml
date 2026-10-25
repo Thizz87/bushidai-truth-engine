@@ -1,0 +1,34 @@
+# docker-compose.yml
+# Start Ollama + BushiDAI Streamlit in één keer
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: bushidai-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+    # Optioneel: GPU support (uncomment als je NVIDIA GPU hebt)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  bushidai:
+    build: .
+    container_name: bushidai-app
+    ports:
+      - "8501:8501"
+    depends_on:
+      - ollama
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    restart: unless-stopped
+
+volumes:
+  ollama_data:

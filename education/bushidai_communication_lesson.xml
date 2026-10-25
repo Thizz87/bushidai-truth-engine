@@ -1,0 +1,65 @@
+PREFIX bushidai: <https://bushidai.org/ontology#>
+PREFIX uvrm: <https://un.org/udhr#>
+PREFIX evrm: <https://echr.coe.int#>
+PREFIX dma: <https://ec.europa.eu/dma#>
+PREFIX xai: <https://x.ai/ontology#>
+
+SELECT 
+  "Gouden Combo: xAI + BushiDAI + Musk + Humanity — Geo Governance WAS" AS ?lessonName,
+  ?pointNumber,
+  ?pointDescription,
+  ?semanticTool,
+  ?technocraticProblem,
+  ?embodiedAlternative,
+  ?concreteExample,
+  ?selfProtectClause,
+  ?riskLevel,
+  "= Symbiose" AS ?goldenCombo
+WHERE {
+  ?lesson a bushidai:CommunicationLesson ;
+          bushidai:name "Gouden Combo xAI + BushiDAI + Humanity" .
+
+  ?point a bushidai:LessonPoint ;
+         bushidai:belongsTo ?lesson ;
+         bushidai:pointNumber ?pointNumber ;
+         bushidai:description ?pointDescription .
+
+  # Exacte data uit jouw screenshots
+  BIND(
+    IF(?pointNumber = "1", "Pavlov semantiek / state education",
+    IF(?pointNumber = "2", "Intentie oncontroleerbaar",
+    IF(?pointNumber = "3", "Directe mens-op-mens communicatie (geen ruis)",
+    IF(?pointNumber = "4", "Intentie maker nooit 100% te verifiëren",
+    IF(?pointNumber = "5", "Afhankelijk van tokens",
+    IF(?pointNumber = "Nafudakake", "Intrinsieke motivatie in dojo",
+    "75% wereldbevolking onder AI-surveillance (Gillmor 2030)"))))))) AS ?technocraticProblem
+
+  BIND(
+    IF(?pointNumber = "1", "Karate / Sanchin",
+    IF(?pointNumber = "2", "Mens-op-mens",
+    IF(?pointNumber = "3", "Direct mens-op-mens",
+    IF(?pointNumber = "4", "Embodied karate training",
+    IF(?pointNumber = "5", "Real life communicatie",
+    IF(?pointNumber = "Nafudakake", "Sensei-leerling relatie",
+    "Open truth-stack"))))))) AS ?embodiedAlternative
+
+  BIND(
+    IF(?pointNumber = "1", "Weekblad Dongen AI-hype artikel (\"van hype naar hands-on hulp\")",
+    IF(?pointNumber = "2", "Sensei snacky comment (99% van de Staat begrijpt het niet)",
+    IF(?pointNumber = "3", "Intimiteit (consensus: hug, kus, seks) + Nafudakake bord",
+    IF(?pointNumber = "4", "Nafudakake bord (12-16 jarigen) + Toeslagenaffaire algoritme-discriminatie",
+    IF(?pointNumber = "5", "Weekblad Dongen + CWI-geschiedenis + Koning algoritme-waarschuwing",
+    IF(?pointNumber = "Nafudakake", "Afstudeerproject Thijs Smits (Avans CMD) + Gojukai felicitatie",
+    "Pew Research / Gillmor quote"))))))) AS ?concreteExample
+
+  BIND("UVRM Art 30 / EVRM Art 17" AS ?selfProtectClause)
+
+  BIND(
+    IF(?pointNumber IN ("1","2","4","5") || CONTAINS(?technocraticProblem, "staat") || CONTAINS(?concreteExample, "Toeslagenaffaire") || CONTAINS(?concreteExample, "Gillmor"), 
+       "High Ruis & Intentie-Verlies (technocratisch ontwerp)",
+       "Low - Embodied Truth (karate / Bushido / Nafudakake)") AS ?riskLevel
+  )
+
+  FILTER (?pointNumber IN ("1","2","3","4","5","Nafudakake","Gillmor"))
+}
+ORDER BY ?pointNumber

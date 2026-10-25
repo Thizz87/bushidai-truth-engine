@@ -1,17 +1,27 @@
 #!/usr/bin/env python3
 """
-MULTI-VACCINE SPIKE JOINT OPTIMIZATION TRACKER & DIAGNOSTIC TOOL
-Engineered for Joint CAI + GC + MFE Structural Vulnerability Assessment
-Production Grade – FACT == FACT
+MULTI-VACCINE JOINT OPTIMIZATION SCANNER
+Clean Base Engine + Refined GUI Integration
+TRUTH == TRUTH
 """
 
 import sys
-import argparse
+import json
+import csv
 from pathlib import Path
 from math import exp, log
 from typing import Tuple, Dict, Any, List
 
-# ========================== CAI & CODON TRANSLATION MAPS ==========================
+try:
+    from Bio.Seq import Seq
+except ImportError:
+    print("[-] Missing dependency: pip install biopython")
+    sys.exit(1)
+
+import tkinter as tk
+from tkinter import ttk, messagebox, filedialog
+
+# ========================== CODON & VULNERABILITY TABLES ==========================
 HUMAN_CODON_USAGE = {
     'A': {'GCT': 0.26, 'GCC': 0.40, 'GCA': 0.23, 'GCG': 0.11},
     'C': {'TGT': 0.46, 'TGC': 0.54},
@@ -32,205 +42,294 @@ HUMAN_CODON_USAGE = {
     'T': {'ACT': 0.24, 'ACC': 0.36, 'ACA': 0.28, 'ACG': 0.12},
     'V': {'GTT': 0.18, 'GTC': 0.24, 'GTA': 0.11, 'GTG': 0.47},
     'W': {'TGG': 1.00},
-    'Y': {'TAT': 0.44, 'TAC': 0.56},
+    'Y': {'TAT': 0.44, 'TAC': 0.56}
 }
+CODON_TABLE = {k: v for k, v in HUMAN_CODON_USAGE.items()}
 
-CODON_TABLE = {k: v for k, v in HUMAN_CODON_USAGE.items() if k != '*'}
-TWOP_SIGNATURE = "CCCCCC"
-
-# ========================== BIOLOGICAL CRITICAL SITE MOTIFS ==========================
 CRITICAL_VULNERABILITIES = {
-    "AATAAA": "Canonical Polyadenylation Signal (Causes premature mRNA truncation)",
-    "ATTAAA": "Alternative Polyadenylation Motifs (Leads to early transcription drop-off)",
-    "TTTTTT": "Polyu-T Tracts (Triggers mechanical RNA Polymerase II termination)",
-    "AAAAAA": "Internal Poly-A Slip Site (Induces structural translation frame-shifting)",
-    "CAGGTAAG": "Consensus 5' Splice Site (Creates severe unintended splice variants)",
+    "AATAAA": "Canonical Polyadenylation Signal (premature mRNA truncation)",
+    "ATTAAA": "Alternative Polyadenylation Motif",
+    "TTTTTT": "Poly-U Tract (RNA Polymerase II termination)",
+    "AAAAAA": "Internal Poly-A Slip Site (frameshift risk)",
+    "CAGGTAAG": "Consensus 5' Splice Site"
 }
 
-def calculate_cai(dna: str) -> float:
-    """Calculate Codon Adaptation Index (CAI) for open reading frame fitness tracking."""
-    if len(dna) % 3 != 0:
-        return 0.0
-    cai_values = []
-    for i in range(0, len(dna), 3):
-        codon = dna[i:i+3]
-        aa = next((aa for aa, codons in HUMAN_CODON_USAGE.items() if codon in codons), None)
-        if aa is None:
-            continue
-        max_freq = max(HUMAN_CODON_USAGE[aa].values())
-        w = HUMAN_CODON_USAGE[aa].get(codon, 0) / max_freq if max_freq > 0 else 0
-        if w > 0:
-            cai_values.append(w)
-    return round(exp(sum(log(w) for w in cai_values) / len(cai_values)), 4) if cai_values else 0.0
-
-
-# ========================== NEW COMPONENT ADVANCED MODULES ==========================
-
-def analyze_gc_content(dna: str, window_size: int = 75, critical_threshold: float = 40.0) -> Tuple[float, List[Dict[str, Any]]]:
-    """
-    MODULE 1: GC-Content Analyzer
-    Measures overall GC% and flags severe localized regional drops.
-    Low regional GC% destroys secondary mRNA folding.
-    """
-    total_gc = ((dna.count('G') + dna.count('C')) / len(dna)) * 100
-    vulnerable_windows = []
-    
-    for i in range(0, len(dna) - window_size + 1, 15): # Step by 15 bases
-        window_seq = dna[i:i + window_size]
-        win_gc = ((window_seq.count('G') + window_seq.count('C')) / window_size) * 100
-        if win_gc < critical_threshold:
-            vulnerable_windows.append({
-                "position": i,
-                "sequence": window_seq,
-                "gc_percentage": round(win_gc, 2)
-            })
-            
-    return round(total_gc, 2), vulnerable_windows
-
-
-def check_structural_vulnerabilities(dna: str) -> List[Dict[str, Any]]:
-    """
-    MODULE 2: Accidental Secondary Structure Restriction Check
-    Flags sequences matching breakdown pathways or premature processing errors in human cells.
-    """
-    detected_issues = []
-    for motif, description in CRITICAL_VULNERABILITIES.items():
-        pos = dna.find(motif)
-        while pos != -1:
-            detected_issues.append({
-                "position": pos,
-                "motif": motif,
-                "risk": description
-            })
-            pos = dna.find(motif, pos + 1)
-    return detected_issues
-
-
-def approximate_mfe_bottlenecks(dna: str) -> Dict[str, Any]:
-    """
-    MODULE 3: MFE Approximation & Translation Bottleneck Metric
-    Evaluates where structural constraints conflict heavily with optimal human expression.
-    Calculates consecutive low-frequency human codons causing ribosomal traffic jams.
-    """
-    bottlenecks = []
-    consecutive_low_codons = 0
-    start_pos = 0
-    
-    for i in range(0, len(dna), 3):
-        codon = dna[i:i+3]
-        aa = next((aa for aa, codons in HUMAN_CODON_USAGE.items() if codon in codons), None)
-        if aa:
-            freq = HUMAN_CODON_USAGE[aa].get(codon, 0)
-            if freq < 0.15: # Critical human codon frequency floor
-                if consecutive_low_codons == 0:
-                    start_pos = i
-                consecutive_low_codons += 1
-            else:
-                if consecutive_low_codons >= 3: # 3 or more consecutive rare codons equals a bottleneck
-                    bottlenecks.append({"position": start_pos, "length_codons": consecutive_low_codons})
-                consecutive_low_codons = 0
-                
-    stability_score = max(0.0, 100.0 - (len(bottlenecks) * 4.5))
-    return {"stability_score": round(stability_score, 2), "bottlenecks": bottlenecks}
-
-
-# ========================== SARS-COV-2 REF LAYERS ==========================
 WUHAN_SPIKE_AA = "MFVFLVLLPLVSSQCVNLTTRTQLPPAYTNSFTRGVYYPDKVFRSSVLHSTQDLFLPFFSNVTWFHAIHVSGTNGTKRFDNPVLPFNDGVYFASTEKSNIIRGWIFGTTLDSKTQSLLIVNNATNVVIKVCEFQFCNDPFLGVYYHKNNKSWMESEFRVYSSANNCTFEYVSQPFLMDLEGKQGNFKNLREFVFKNIDGYFKIYSKHTPINLVRDLPQGFSALEPLVDLPIGINITRFQTLLALHRSYLTPGDSSSGWTAGAAAYYVGYLQPRTFLLKYNENGTITDAVDCALDPLSETKCTLKSFTVEKGIYQTSNFRVQPTESIVRFPNITNLCPFGEVFNATRFASVYAWNRKRISNCVADYSVLYNSASFSTFKCYGVSPTKLNDLCFTNVYADSFVIRGDEVRQIAPGQTGKIADYNYKLPDDFTGCVIAWNSNNLDSKVGGNYNYLYRLFRKSNLKPFERDISTEIYQAGSTPCNGVEGFNCYFPLQSYGFQPTNGVGYQPYRVVVLSFELLHAPATVCGPKKSTNLVKNKCVNFNFNGLTGTGVLTESNKKFLPFQQFGRDIADTTDAVRDPQTLEILDITPCSFGGVSVITPGTNTSNQVAVLYQDVNCTEVPVAIHADQLTPTWRVYSTGSNVFQTRAGCLIGAEHVNNSYECDIPIGAGICASYQTQTNSPRRARSVASQSIIAYTMSLGAENSVAYSNNSIAIPTNFTISVTTEILPVSMTKTSVDCTMYICGDSTECSNLLLQYGSFCTQLNRALTGIAVEQDKNTQEVFAQVKQIYKTPPIKDFGGFNFSQILPDPSKPSKRSFIEDLLFNKVTLADAGFIKQYGDCLGDIAARDLICAQKFNGLTVLPPLLTDEMIAQYTSALLAGTITSGWTFGAGAALQIPFAMQMAYRFNGIGVTQNVLYENQKLIANQFNSAIGKIQDSLSSTASALGKLQDVVNQNAQALNTLVKQLSSNFGAISSVLNDILSRLDKVEAEVQIDRLITGRLQSLQTYVTQQLIRAAEIRASANLAATKMSECVLGQSKRVDFCGKGYHLMSFPQSAPHGVVFLHVTYVPAQEKNFTTAPAICHDGKAHFPREGVFVSNGTHWFVTQRNFYEPQIITTDNTFVSGNCDVVIGIVNNTVYDPLQPELDSFKEELDKYFKNHTSPDVDLGDISGINASVVNIQKEIDRLNEVAKNLNESLIDLQELGKYEQYIKWPWYIWLGFIAGLIAIVMVTIMLCCMTSCCSCLKGCCSCGSCCKFDEDDSEPVLKGVKLHYT"
 
-PFIZER_BNT162b2_DNA = (
-    "ATGTTCGTGTTCCTGGTGCTGCTGCCTCTGGTGTCCAGCCAGTGTGTGAACCTGACCACCAGAACACAGCTGCCTCCAGCCTACACCAACAGCTTTACCAGAGGCGTGTACTACCCCGACAAGGTGTTCAGATCCAGCGTGCTGCACACTCTACCCAGGACCTGTTCCTGCCTTTCTTCAGCAACGTGACCTGGTTCCACGCCATCCACGTGTCCGGCACCAATGGCACCAAGAGATTCGACAACCCCCGTGCTGCCCTTCAACGACGGGGTGTACTTTGCCAGCACCGAGAAGTCCAACATCATCAGAGGCTGGATCTTCGGCACCACACTGGACAGCAAGACCCAGAGCCTGCTGATCGTGAACAACGCCACCAACGTGGTCATCAAAGTGTGCGAGTTCCAGTTCTGCAACGACCCCTTCCTGGGCGTCTACTACCACAAGAACAACAAGAGCTGGATGGAAAGCGAGTTCCGGGTGTACAGCAGCGCCAACAACTGCACCTTCGAGTACGTGTCCCAGCCTTTCCTGATGGACCTGGAAGGCAAGCAGGGCAACTTCAAGAACCTGCGCGAGTTCGTGTTTAAGAACATCGACGGCTACTTCAAGATCTACAGCAAGCACACCCCTATCAACCTCGTGCGGGATCTGCCTCAGGGCTTCTCTGCTCTGGAACCCCTGGTGGATCTGCCCATCGGCATCAACATCACCCGGTTTCAGACACTGCTGGCCCTGCACAGAAGCTACCTGACACCTGGCGATAGCAGCAGCGGATGGACAGCTGGTGCCGCCGCTTACTATGTGGGCTACCTGCAGCCTAGAACCTTCCTGCTGAAGTACAACGAGAACGGCACCATCACCGACGCCGTGGATTGTGCTCTGGATCCTCTGAGCGAGACAAAGTGCACCCTGAAGTCCTTCACCGTGGAAAAGGGCATCTACCAGACCAGCAACTTCCGGGTGCAGCCCACCGAATCCATCGTGCGGTTCCCCAATATCACCAATCTGTGCCCCTTCGGCGAGGTGTTCAATGCCACCAGATTCGCCTCTGTGTACGCCTGGAACCGGAAGCGGATCAGCAATTGCGTGGCCGACTACTCCGTGCTGTACAACTCCGCCAGCTTCAGCACCTTCAAGTGCTACGGCGTGTCCCCTACCAAGCTGAACGACCTGTGCTTCACAAACGTGTACGCCGACAGCTTCGTGATCCGGGGAGATGAAGTGCGGCAGATTGCCCCTGGACAGACAGGCAAGATCGCCGACTACAACTACAAGCTGCCCGACGACTTCACCGGCTGTGTGATTGCCTGGAACAGCAACAACCTGGACTCCAAAGTCGGCGGCAACTACAACTACCTGTACCGGCTGTTCCGGAAGTCCAATCTGAAGCCCTTCGAGCGGGACATCTCCACCGAGATCTATCAGGCCGGCAGCACCCCTTGTAACGGCGTGGAAGGCTTCAACTGCTACTTCCCACTGCAGTCCTACGGCTTTCAGCCCACAAATGGCGTGGGCTATCAGCCCTACAGAGTGGTGGTGCTGAGCTTCGAACTGCTGCATGCCCCTGCCACAGTGTGCGGCCCTAAGAAAAGCACCAATCTCGTGAAGAACAAATGCGTGAACTTCAACTTCAACGGCCTGACCGGCACCGGCGTGCTGACAGAGAGCAACAAGAAGTTCCTGCCATTCCAGCAGTTTGCCGGGATATCGCCGATACCACAGACGCCGTTAGAGATCCCCAGACACTGGAAATCCTGGACATCACCCCTTGCAGCTTCGGCGGAGTGTCTGTGATCACCCTGGCACCAACACCAGCAATCAGGTGGCAGTGCTGTACCAGGACGTGAACTGTACCGAAGTGCCCGTGGCCATTCACGCCGATCAGCTGACACCTACATGGCGGGTGTACTCCACCGGCAGCAATGTGTTTCAGACCAGAGCCGGCTGTCTGATCGGAGCCGAGCACGTGAACAATAGCTACGAGTGCGACATCCCCATCGGCGCTGGAATCTGCGCCAGCTACCAGACACAGACAAACAGCCCTCGGAGAGCCAGAAGCGTGGCCAGCCAGAGCATCATTGCCTACACAATGTCTCTGGGCGCCGAGAACAGCGTGGCCTACTCCAACAACTCTATCGCTATCCCCACCAACTTCACCATCAGCGTGACCACAGAGATCCTGCCTGTGTCCATGACCAAGACCAGCGTGGACTGCACCATGTACATCTGCGGCGATTCCACCGAGTGCTCCAACCTGCTGCTGCAGTACGGCAGCTTCTGCACCCAGCTGAATAGAGCCCTGACAGGGATCGCCGTGGAACAGGACAAGAACACCCAAGAGGTGTTCGCCCAAGTGAAGCAGATCTACAAGACCCCTCCTATCAAGGACTTCGGCGGCTTCAATTTCAGCCAGATTCTGCCCGATCCTAGCAAGCCCAGCAAGCGGAGCTTCATCGAGGACCTGCTGTTCAACAAAGTGACACTGGCCGACGCCGGCTTCATCAAGCAGTATGGCGATTGTCTGGGCGACATTGCCGCCAGGGATCTGATTTGCGCCCAGAAGTTTAACGGACTGACAGTGCTGCCTCCTCTGCTGACCGATGAGATGATCGCCCAGTACACATCTGCCCTGCTGGCCGGCACAATCACAAGCGGCTGGACATTTGGAGCAGGCGCCGCTCTGCAGATCCCCTTTGCTATGCAGATGGCCTACCGGTTCAACGGCATCGGAGTGACCCAGAATGTGCTGTACGAGAACCAGAAGCTGATCGCCAACCAGTTCAACAGCGCCATCGGCAAGATCCAGGACAGCCTGAGCAGCACAGCAAGCGCCCTGGGAAAGCTGCAGGACGTGGTCAACCAGAATGCCCAGGCACTGAACACCCTGGTCAAGCAGCTGTCCTCCAACTTCGGCGCCATCAGCTCTGTGCTGAACGATATCCTGAGCAGACTGGACCCTCCTGAGGCCGAGGTGCAGATCGACAGACTGATCACAGGCAGACTGCAGAGCCTCCAGACATACGTGACCCAGCAGCTGATCAGAGCCGCCGAGATTAGAGCCTCTGCCAATCTGGCCGCCACCAAGATGTCTGAGTGTGTGCTGGGCCAGAGCAAGAGAGTGGACTTTTGCGGCAAGGGCTACCACCTGATGAGCTTCCCTCAGTCTGCCCCTCACGGCGTGGTGTTTCTGCACGTGACATATGTGCCCGCTCAAGAGAAGAATTTCACCACCGCTCCAGCCATCTGCCACGACGGCAAAGCCCACTTTCCTAGAGAAGGCGTGTTCGTGTCCAACGGCACCCATTGGTTCGTGACACAGCGGAACTTCTACGAGCCCCAGATCATCACCACCGACAACACCTTCGTGTCTGGCAACTGCGACGTCGTGATCGGCATTGTGAACAATACCGTGTACGACCCTCTGCAGCCCGAGCTGGACAGCTTCAAAGAGGAACTGGACAAGTACTTTAAGAACCACACAAGCCCCGACGTGGACCTGGGCGATATCAGCGGAATCAATGCCAGCGTCGTGAACATCCAGAAAGAGATCGACCGGCTGAACGAGGTGGCCAAGAATCTGAACGAGAGCCTGATCGACCTGCAAGAACTGGGGAAGTACGAGCAGTACATCAAGTGGCCCTGGTACATCTGGCTGGGCTTTATCGCCGGACTGATTGCCATCGTGATGGTCACAATCATGCTGTGTTGCATGACCAGCTGCTGTAGCTGCCTGAAGGGCTGTTGTAGCTGTGGCAGCTGCTGCAAGTTCGACGAGGACGATTCTGAGCCCGTGCTGAAGGGCGTGAAACTGCACTACACATGA"
-)
+# ========================== DEMO SEQUENCE ==========================
+DEMO_VULNERABLE_DNA = "ATGTTCGTGTTCCTGGTGCTGCTGCCTCTGGTGTCCAGCCAGTGTGTGAACCTGACCACCAGAACACAGCTGCCTAATAAAGCCGCTACTTTTTTTGCCAGCACCGAGAAGTCCAACATCATCAGAGGCTGGATCTTCGGCACCACACTGGACAGCAAGACCCAGAGCCTGCTGATCGTGAACAACGCCACCAACGTGGTCATCAAAGTGTGCGAGTTCCAGTTCCAGGTAAGCCCTTCCTGGGCGTCTACTACCACAAGAACAACAAGAGCTGGATGGAAAGCGAGTTCCGGGTGTACAAAAAAAGCCAACAACTGCACCTTCGAGTACGTGTCCCAGCCTTTCCTGATGGACCTGGAAGGCAAGCAGGGCAACTTCAAGAACCTGCGCGAGTTCGTGTTTAAGAACATCGACGGCTACTTCAAGATCTACAGCAAGCACACCCCTATCAACCTCGTGCGGGATCTGCCTCAGGGCTTCTCTGCTCTGGAACCCCTGGTGGATCTGCCCATCGGCATCAACATCACCCGGTTT"
 
-VACCINES: Dict[str, Dict[str, Any]] = {
-    "pfizer":      {"name": "Pfizer/BioNTech BNT162b2", "type": "mRNA",              "dna_reference": PFIZER_BNT162b2_DNA},
-    "moderna":     {"name": "Moderna mRNA-1273",        "type": "mRNA",              "dna_reference": None},
-    "janssen":     {"name": "Janssen Ad26.COV2.S",      "type": "Adenovirus-vector", "dna_reference": None},
-    "novavax":     {"name": "Novavax NVX-CoV2373",      "type": "Protein subunit",   "dna_reference": None},
-    "astrazeneca": {"name": "AstraZeneca ChAdOx1",      "type": "Adenovirus-vector", "dna_reference": None}
+# ========================== PFIZER ==========================
+PFIZER_BNT162b2_DNA = "ATGTTCGTGTTCCTGGTGCTGCTGCCTCTGGTGTCCAGCCAGTGTGTGAACCTGACCACCAGAACACAGCTGCCTCCAGCCTACACCAACAGCTTTACCAGAGGCGTGTACTACCCCGACAAGGTGTTCAGATCCAGCGTGCTGCACACTCTACCCAGGACCTGTTCCTGCCTTTCTTCAGCAACGTGACCTGGTTCCACGCCATCCACGTGTCCGGCACCAATGGCACCAAGAGATTCGACAACCCCGTGCTGCCCTTCAACGACGGGGTGTACTTTGCCAGCACCGAGAAGTCCAACATCATCAGAGGCTGGATCTTCGGCACCACACTGGACAGCAAGACCCAGAGCCTGCTGATCGTGAACAACGCCACCAACGTGGTCATCAAAGTGTGCGAGTTCCAGTTCTGCAACGACCCCTTCCTGGGCGTCTACTACCACAAGAACAACAAGAGCTGGATGGAAAGCGAGTTCCGGGTGTACAGCAGCGCCAACAACTGCACCTTCGAGTACGTGTCCCAGCCTTTCCTGATGGACCTGGAAGGCAAGCAGGGCAACTTCAAGAACCTGCGCGAGTTCGTGTTTAAGAACATCGACGGCTACTTCAAGATCTACAGCAAGCACACCCCTATCAACCTCGTGCGGGATCTGCCTCAGGGCTTCTCTGCTCTGGAACCCCTGGTGGATCTGCCCATCGGCATCAACATCACCCGGTTTCAGACACTGCTGGCCCTGCACAGAAGCTACCTGACACCTGGCGATAGCAGCAGCGGATGGACAGCTGGTGCCGCCGCTTACTATGTGGGCTACCTGCAGCCTAGAACCTTCCTGCTGAAGTACAACGAGAACGGCACCATCACCGACGCCGTGGATTGTGCTCTGGATCCTCTGAGCGAGACAAAGTGCACCCTGAAGTCCTTCACCGTGGAAAAGGGCATCTACCAGACCAGCAACTTCCGGGTGCAGCCCACCGAATCCATCGTGCGGTTCCCCAATATCACCAATCTGTGCCCCTTCGGCGAGGTGTTCAATGCCACCAGATTCGCCTCTGTGTACGCCTGGAACCGGAAGCGGATCAGCAATTGCGTGGCCGACTACTCCGTGCTGTACAACTCCGCCAGCTTCAGCACCTTCAAGTGCTACGGCGTGTCCCCTACCAAGCTGAACGACCTGTGCTTCACAAACGTGTACGCCGACAGCTTCGTGATCCGGGGAGATGAAGTGCGGCAGATTGCCCCTGGACAGACAGGCAAGATCGCCGACTACAACTACAAGCTGCCCGACGACTTCACCGGCTGTGTGATTGCCTGGAACAGCAACAACCTGGACTCCAAAGTCGGCGGCAACTACAATTACCTGTACCGGCTGTTCCGGAAGTCCAATCTGAAGCCCTTCGAGCGGGACATCTCCACCGAGATCTATCAGGCCGGCAGCACCCCTTGTAACGGCGTGGAAGGCTTCAACTGCTACTTCCCACTGCAGTCCTACGGCTTTCAGCCCACAAATGGCGTGGGCTATCAGCCCTACAGAGTGGTGGTGCTGAGCTTCGAACTGCTGCATGCCCCTGCCACAGTGTGCGGCCCTAAGAAAAGCACCAATCTCGTGAAGAACAAATGCGTGAACTTCAACTTCAACGGCCTGACCGGCACCGGCGTGCTGACAGAGAGCAACAAGAAGTTCCTGCCATTCCAGCAGTTCGGCCGGGATATCGCCGATACCACAGACGCCGTTAGAGATCCCCAGACACTGGAAATCCTGGACATCACCCCTTGCAGCTTCGGCGGAGTGTCTGTGATCACCCCTGGCACCAACACCAGCAATCAGGTGGCAGTGCTGTACCAGGACGTGAACTGTACCGAAGTGCCCGTGGCCATTCACGCCGATCAGCTGACACCTACATGGCGGGTGTACTCCACCGGCAGCAATGTGTTTCAGACCAGAGCCGGCTGTCTGATCGGAGCCGAGCACGTGAACAATAGCTACGAGTGCGACATCCCCATCGGCGCTGGAATCTGCGCCAGCTACCAGACACAGACAAACAGCCCTCGGAGAGCCAGAAGCGTGGCCAGCCAGAGCATCATTGCCTACACAATGTCTCTGGGCGCCGAGAACAGCGTGGCCTACTCCAACAACTCTATCGCTATCCCCACCAACTTCACCATCAGCGTGACCACAGAGATCCTGCCTGTGTCCATGACCAAGACCAGCGTGGACTGCACCATGTACATCTGCGGCGATTCCACCGAGTGCTCCAACCTGCTGCTGCAGTACGGCAGCTTCTGCACCCAGCTGAATAGAGCCCTGACAGGGATCGCCGTGGAACAGGACAAGAACACCCAAGAGGTGTTCGCCCAAGTGAAGCAGATCTACAAGACCCCTCCTATCAAGGACTTCGGCGGCTTCAATTTCAGCCAGATTCTGCCCGATCCTAGCAAGCCCAGCAAGCGGAGCTTCATCGAGGACCTGCTGTTCAACAAAGTGACACTGGCCGACGCCGGCTTCATCAAGCAGTATGGCGATTGTCTGGGCGACATTGCCGCCAGGGATCTGATTTGCGCCCAGAAGTTTAACGGACTGACAGTGCTGCCTCCTCTGCTGACCGATGAGATGATCGCCCAGTACACATCTGCCCTGCTGGCCGGCACAATCACAAGCGGCTGGACATTTGGAGCAGGCGCCGCTCTGCAGATCCCCTTTGCTATGCAGATGGCCTACCGGTTCAACGGCATCGGAGTGACCCAGAATGTGCTGTACGAGAACCAGAAGCTGATCGCCAACCAGTTCAACAGCGCCATCGGCAAGATCCAGGACAGCCTGAGCAGCACAGCAAGCGCCCTGGGAAAGCTGCAGGACGTGGTCAACCAGAATGCCCAGGCACTGAACACCCTGGTCAAGCAGCTGTCCTCCAACTTCGGCGCCATCAGCTCTGTGCTGAACGATATCCTGAGCAGACTGGACCCTCCTGAGGCCGAGGTGCAGATCGACAGACTGATCACAGGCAGACTGCAGAGCCTCCAGACATACGTGACCCAGCAGCTGATCAGAGCCGCCGAGATTAGAGCCTCTGCCAATCTGGCCGCCACCAAGATGTCTGAGTGTGTGCTGGGCCAGAGCAAGAGAGTGGACTTTTGCGGCAAGGGCTACCACCTGATGAGCTTCCCTCAGTCTGCCCCTCACGGCGTGGTGTTTCTGCACGTGACATATGTGCCCGCTCAAGAGAAGAATTTCACCACCGCTCCAGCCATCTGCCACGACGGCAAAGCCCACTTTCCTAGAGAAGGCGTGTTCGTGTCCAACGGCACCCATTGGTTCGTGACACAGCGGAACTTCTACGAGCCCCAGATCATCACCACCGACAACACCTTCGTGTCTGGCAACTGCGACGTCGTGATCGGCATTGTGAACAATACCGTGTACGACCCTCTGCAGCCCGAGCTGGACAGCTTCAAAGAGGAACTGGACAAGTACTTTAAGAACCACACAAGCCCCGACGTGGACCTGGGCGATATCAGCGGAATCAATGCCAGCGTCGTGAACATCCAGAAAGAGATCGACCGGCTGAACGAGGTGGCCAAGAATCTGAACGAGAGCCTGATCGACCTGCAAGAACTGGGGAAGTACGAGCAGTACATCAAGTGGCCCTGGTACATCTGGCTGGGCTTTATCGCCGGACTGATTGCCATCGTGATGGTCACAATCATGCTGTGTTGCATGACCAGCTGCTGTAGCTGCCTGAAGGGCTGTTGTAGCTGTGGCAGCTGCTGCAAGTTCGACGAGGACGATTCTGAGCCCGTGCTGAAGGGCGTGAAACTGCACTACACATGA"
+PFIZER_5UTR = "GAAUAAACUAGUAUUCUUCUGGUCCCCACAGACUCAGAGAGAACCCGCCACC"
+PFIZER_POLYA = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + "GCATATGACT" + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+PFIZER_RESIDUAL_DNA = {
+    "SV40": "Aanwezig in Pfizer plasmid",
+    "ori": "Aanwezig",
+    "source": "McKernan OSF 2023 + Speicher et al."
 }
 
-# ========================== REVERSE CONSTRUCTORS ==========================
-def reverse_engineer_codons(aa_sequence: str) -> str:
-    """Map amino acids to highest-frequency human codons."""
-    return ''.join(max(CODON_TABLE[aa], key=CODON_TABLE[aa].get) if aa in CODON_TABLE else 'NNN' for aa in aa_sequence)
+# ========================== MODERNA ==========================
+MODERNA_MRNA1273_DNA = "ATGTTCGTGTTCCTGGTGCTGCTGCCCCTGGTGAGCAGCCAGTGCGTGAACCTGACCACCCGGACCCAGCTGCCACCAGCCTACACCAACAGCTTCACCCGGGGCGTCTACTACCCCGACAAGGTGTTCCGGAGCAGCGTCCTGCACAGCACCCAGGACCTGTTCCTGCCCTTCTTCAGCAACGTGACCTGGTTCCACGCCATCCACGTGAGCGGCACCAACGGCACCAAGCGGTTCGACAACCCCGTGCTGCCCTTCAACGACGGCGTGTACTTCGCCAGCACCGAGAAGAGCAACATCATCCGGGGCTGGATCTTCGGCACCACCCTGGACAGCAAGACCCAGAGCCTGCTGATCGTGAATAACGCCACCAACGTGGTGATCAAGGTGTGCGAGTTCCAGTTCTGCAACGACCCCTTCCTGGGCGTGTACTACCACAAGAACAACAAGAGCTGGATGGAGAGCGAGTTCCGGGTGTACAGCAGCGCCAACAACTGCACCTTCGAGTACGTGAGCCAGCCCTTCCTGATGGACCTGGAGGGCAAGCAGGGCAACTTCAAGAACCTGCGGGAGTTCGTGTTCAAGAACATCGACGGCTACTTCAAGATCTACAGCAAGCACACCCCAATCAACCTGGTGCGGGATCTGCCCCAGGGCTTCTCAGCCCTGGAGCCCCTGGTGGACCTGCCCATCGGCATCAACATCACCCGGTTCCAGACCCTGCTGGCCCTGCACCGGAGCTACCTGACCCCAGGCGACAGCAGCAGCGGGTGGACAGCAGGCGCGGCTGCTTACTACGTGGGCTACCTGCAGCCCCGGACCTTCCTGCTGAAGTACAACGAGAACGGCACCATCACCGACGCCGTGGACTGCGCCCTGGACCCTCTGAGCGAGACCAAGTGCACCCTGAAGAGCTTCACCGTGGAGAAGGGCATCTACCAGACCAGCAACTTCCGGGTGCAGCCCACCGAGAGCATCGTGCGGTTCCCCAACATCACCAACCTGTGCCCCTTCGGCGAGGTGTTCAACGCCACCCGGTTCGCCAGCGTGTACGCCTGGAACCGGAAGCGGATCAGCAACTGCGTGGCCGACTACAGCGTGCTGTACAACAGCGCCAGCTTCAGCACCTTCAAGTGCTACGGCGTGAGCCCCACCAAGCTGAACGACCTGTGCTTCACCAACGTGTACGCCGACAGCTTCGTGATCCGTGGCGACGAGGTGCGGCAGATCGCACCCGGCCAGACAGGCAAGATCGCCGACTACAACTACAAGCTGCCCGACGACTTCACCGGCTGCGTGATCGCCTGGAACAGCAACAACCTCGACAGCAAGGTGGGCGGCAACTACAACTACCTGTACCGGCTGTTCCGGAAGAGCAACCTGAAGCCCTTCGAGCGGGACATCAGCACCGAGATCTACCAAGCCGGCTCCACCCCTTGCAACGGCGTGGAGGGCTTCAACTGCTACTTCCCTCTGCAGAGCTACGGCTTCCAGCCCACCAACGGCGTGGGCTACCAGCCCTACCGGGTGGTGGTGCTGAGCTTCGAGCTGCTGCACGCCCCAGCCACCGTGTGTGGCCCCAAGAAGAGCACCAACCTGGTGAAGAACAAGTGCGTGAACTTCAACTTCAACGGCCTTACCGGCACCGGCGTGCTGACCGAGAGCAACAAGAAATTCCTGCCCTTTCAGCAGTTCGGCCGGGACATCGCCGACACCACCGACGCTGTGCGGGATCCCCAGACCCTGGAGATCCTGGACATCACCCCTTGCAGCTTCGGCGGCGTGAGCGTGATCACCCCAGGCACCAACACCAGCAACCAGGTGGCCGTGCTGTACCAGGACGTGAACTGCACCGAGGTGCCCGTGGCCATCCACGCCGACCAGCTGACACCCACCTGGCGGGTCTACAGCACCGGCAGCAACGTGTTCCAGACCCGGGCCGGTTGCCTGATCGGCGCCGAGCACGTGAACAACAGCTACGAGTGCGACATCCCCATCGGCGCCGGCATCTGTGCCAGCTACCAGACCCAGACCAATTCACCCCGGAGGGCAAGGAGCGTGGCCAGCCAGAGCATCATCGCCTACACCATGAGCCTGGGCGCCGAGAACAGCGTGGCCTACAGCAACAACAGCATCGCCATCCCCACCAACTTCACCATCAGCGTGACCACCGAGATTCTGCCCGTGAGCATGACCAAGACCAGCGTGGACTGCACCATGTACATCTGCGGCGACAGCACCGAGTGCAGCAACCTGCTGCTGCAGTACGGCAGCTTCTGCACCCAGCTGAACCGGGCCCTGACCGGCATCGCCGTGGAGCAGGACAAGAACACCCAGGAGGTGTTCGCCCAGGTGAAGCAGATCTACAAGACCCCTCCCATCAAGGACTTCGGCGGCTTCAACTTCAGCCAGATCCTGCCCGACCCCAGCAAGCCCAGCAAGCGGAGCTTCATCGAGGACCTGCTGTTCAACAAGGTGACCCTAGCCGACGCCGGCTTCATCAAGCAGTACGGCGACTGCCTCGGCGACATAGCCGCCCGGGACCTGATCTGCGCCCAGAAGTTCAACGGCCTGACCGTGCTGCCTCCCCTGCTGACCGACGAGATGATCGCCCAGTACACCAGCGCCCTGTTAGCCGGAACCATCACCAGCGGCTGGACTTTCGGCGCTGGAGCCGCTCTGCAGATCCCCTTCGCCATGCAGATGGCCTACCGGTTCAACGGCATCGGCGTGACCCAGAACGTGCTGTACGAGAACCAGAAGCTGATCGCCAACCAGTTCAACAGCGCCATCGGCAAGATCCAGGACAGCCTGAGCAGCACCGCTAGCGCCCTGGGCAAGCTGCAGGACGTGGTGAACCAGAACGCCCAGGCCCTGAACACCCTGGTGAAGCAGCTGAGCAGCAACTTCGGCGCCATCAGCAGCGTGCTGAACGACATCCTGAGCCGGCTGGACCCTCCCGAGGCCGAGGTGCAGATCGACCGGCTGATCACTGGCCGGCTGCAGAGCCTGCAGACCTACGTGACCCAGCAGCTGATCCGGGCCGCCGAGATTCGGGCCAGCGCCAACCTGGCCGCCACCAAGATGAGCGAGTGCGTGCTGGGCCAGAGCAAGCGGGTGGACTTCTGCGGCAAGGGCTACCACCTGATGAGCTTTCCCCAGAGCGCACCCCACGGAGTGGTGTTCCTGCACGTGACCTACGTGCCCGCCCAGGAGAAGAACTTCACCACCGCCCCAGCCATCTGCCACGACGGCAAGGCCCACTTTCCCCGGGAGGGCGTGTTCGTGAGCAACGGCACCCACTGGTTCGTGACCCAGCGGAACTTCTACGAGCCCCAGATCATCACCACCGACAACACCTTCGTGAGCGGCAACTGCGACGTGGTGATCGGCATCGTGAACAACACCGTGTACGATCCCCTGCAGCCCGAGCTGGACAGCTTCAAGGAGGAGCTGGACAAGTACTTCAAGAATCACACCAGCCCCGACGTGGACCTGGGCGACATCAGCGGCATCAACGCCAGCGTGGTGAACATCCAGAAGGAGATCGATCGGCTGAACGAGGTGGCCAAGAACCTGAACGAGAGCCTGATCGACCTGCAGGAGCTGGGCAAGTACGAGCAGTACATCAAGTGGCCCTGGTACATCTGGCTGGGCTTCATCGCCGGCCTGATCGCCATCGTGATGGTGACCATCATGCTGTGCTGCATGACCAGCTGCTGCAGCTGCCTGAAGGGCTGTTGCAGCTGCGGCAGCTGCTGCAAGTTCGACGAGGACGACAGCGAGCCCGTGCTGAAGGGCGTGAAGCTGCACTACACCTGATAATAG"
+MODERNA_RESIDUAL_DNA = {
+    "SV40": "Niet gedetecteerd",
+    "ori": "Aanwezig",
+    "source": "McKernan OSF 2023 + Speicher et al."
+}
 
-def get_vaccine_reference(vaccine: str) -> str:
-    vax_key = vaccine.lower()
-    if vax_key == "pfizer":      return PFIZER_BNT162b2_DNA
-    if vax_key == "moderna":     return reverse_engineer_codons(WUHAN_SPIKE_AA.replace("K986", "P986").replace("V987", "P987"))
-    if vax_key == "janssen":     return reverse_engineer_codons(WUHAN_SPIKE_AA.replace("R682", "S682").replace("R685", "G685").replace("K986", "P986").replace("V987", "P987"))
-    if vax_key == "novavax":     return reverse_engineer_codons(WUHAN_SPIKE_AA.replace("RRAR", "QQAQ"))
-    if vax_key == "astrazeneca": return reverse_engineer_codons("MDAMKRGLCCVLLLCGAVFVSPS" + WUHAN_SPIKE_AA)
-    raise ValueError(f"Unknown profile: {vaccine}")
+# ========================== JANSSEN / NOVAVAX / ASTRAZENECA ==========================
+JANSSEN_RESIDUAL_DNA = {
+    "type": "Viral vector (Ad26)",
+    "SV40": "Niet van toepassing",
+    "source": "EMA/FDA assessment reports"
+}
+NOVAVAX_RESIDUAL_DNA = {
+    "type": "Recombinant protein (baculovirus / Sf9)",
+    "SV40": "Niet van toepassing",
+    "source": "EMA/FDA assessment reports"
+}
+ASTRAZENECA_RESIDUAL_DNA = {
+    "type": "Viral vector (ChAdOx1)",
+    "SV40": "Niet van toepassing",
+    "notes": "tPA leader sequence",
+    "source": "EMA assessment report"
+}
 
-# ========================== MAIN CLINICAL DIAGNOSTIC PIPELINE ==========================
-def main():
-    parser = argparse.ArgumentParser(description="Advanced Multi-Vaccine Joint Optimization Tracker")
-    parser.add_argument("--vaccine", choices=list(VACCINES.keys()), default="pfizer", help="Platform layout context target")
-    parser.add_argument("--human-dna", type=str, required=True, help="FASTA path or patient sequencing raw text string")
-    parser.add_argument("--output", type=str, default="diagnostic_reports", help="Output log path")
-    args = parser.parse_args()
+# ========================== ENGINE ==========================
+def reverse_engineer_codons(aa_seq: str) -> Seq:
+    return Seq(''.join(
+        max(CODON_TABLE[aa], key=CODON_TABLE[aa].get) if aa in CODON_TABLE else 'NNN'
+        for aa in aa_seq
+    ))
 
-    # Load and purge input sequence data of spaces and hidden carriage returns
-    target = Path(args.human_dna)
-    if target.is_file():
-        human_dna = target.read_text(encoding="utf-8").strip().replace("\n", "").replace("\r", "").replace(" ", "").upper()
-    else:
-        human_dna = args.human_dna.strip().replace("\n", "").replace("\r", "").replace(" ", "").upper()
+def get_vaccine_reference(vaccine: str, mode: str = "real") -> Seq:
+    v = vaccine.lower()
+    mode = mode.lower()
 
-    if len(human_dna) % 3 != 0 and human_dna[-3:] in ['TAA', 'TAG', 'TGA']:
-        human_dna = human_dna[:-3]
+    if v == "pfizer":
+        return Seq(PFIZER_BNT162b2_DNA)
+    if v == "moderna":
+        if mode == "theoretical":
+            return reverse_engineer_codons(
+                WUHAN_SPIKE_AA.replace("K986", "P986").replace("V987", "P987")
+            )
+        return Seq(MODERNA_MRNA1273_DNA)
+    if v == "janssen":
+        return reverse_engineer_codons(
+            WUHAN_SPIKE_AA
+            .replace("R682", "S682").replace("R685", "G685")
+            .replace("K986", "P986").replace("V987", "P987")
+        )
+    if v == "novavax":
+        return reverse_engineer_codons(WUHAN_SPIKE_AA.replace("RRAR", "QQAQ"))
+    if v == "astrazeneca":
+        return reverse_engineer_codons("MDAMKRGLCCVLLLCGAVFVSPS" + WUHAN_SPIKE_AA)
+    return Seq("")
 
-    print("\n" + "="*70)
-    print(f"🧬 ADVANCED JOINT OPTIMIZATION SCANNER: {VACCINES[args.vaccine]['name'].upper()}")
-    print("="*70)
+def get_residual_info(vaccine: str) -> dict:
+    v = vaccine.lower()
+    if v == "pfizer": return PFIZER_RESIDUAL_DNA
+    if v == "moderna": return MODERNA_RESIDUAL_DNA
+    if v == "janssen": return JANSSEN_RESIDUAL_DNA
+    if v == "novavax": return NOVAVAX_RESIDUAL_DNA
+    if v == "astrazeneca": return ASTRAZENECA_RESIDUAL_DNA
+    return {}
 
-    # Core Execution Run Modules
-    ref_dna = get_vaccine_reference(args.vaccine)
-    cai_score = calculate_cai(human_dna)
-    overall_gc, gc_vulnerabilities = analyze_gc_content(human_dna)
-    structural_vulnerabilities = check_structural_vulnerabilities(human_dna)
-    bottleneck_metrics = approximate_mfe_bottlenecks(human_dna)
+def calculate_cai(dna_seq: Seq) -> float:
+    if len(dna_seq) % 3 != 0 or len(dna_seq) == 0:
+        return 0.0
+    cai_values = []
+    for i in range(0, len(dna_seq), 3):
+        codon = str(dna_seq[i:i+3])
+        aa = next((a for a, codons in HUMAN_CODON_USAGE.items() if codon in codons), None)
+        if not aa: continue
+        max_freq = max(HUMAN_CODON_USAGE[aa].values())
+        w = HUMAN_CODON_USAGE[aa].get(codon, 0) / max_freq if max_freq > 0 else 0
+        if w > 0: cai_values.append(w)
+    return round(exp(sum(log(w) for w in cai_values) / len(cai_values)), 4) if cai_values else 0.0
 
-    # Calculate mismatches safely
-    min_len = min(len(ref_dna), len(human_dna))
-    mismatches = sum(1 for a, b in zip(ref_dna[:min_len], human_dna[:min_len])) + abs(len(ref_dna) - len(human_dna))
-    variance_pct = (mismatches / len(ref_dna)) * 100
+def analyze_gc_content(dna_seq: Seq) -> Tuple[float, List[Dict[str, Any]]]:
+    if len(dna_seq) == 0: return 0.0, []
+    total_gc = ((dna_seq.count('G') + dna_seq.count('C')) / len(dna_seq)) * 100
+    vulnerable = []
+    for i in range(0, len(dna_seq) - 74, 15):
+        window = dna_seq[i:i+75]
+        win_gc = ((window.count('G') + window.count('C')) / 75) * 100
+        if win_gc < 40.0:
+            vulnerable.append({"position": i, "gc": round(win_gc, 2)})
+    return round(total_gc, 2), vulnerable
 
-    # Print out clean, high-density scientific readouts
-    print(f"\n[+] TRANSLATIONAL ADAPTATION INDEX (CAI) : {cai_score}")
-    print(f"[+] TOTAL GENOMIC GC CONTENT COMPOSITION : {overall_gc}%  (Target: 57-62% for ideal mRNA half-life)")
-    print(f"[+] TRANSLATION EFFICIENCY STABILITY     : {bottleneck_metrics['stability_score']}/100")
-    print(f"[+] TOTAL MUTATIONAL SEQUENCE MISMATCHES : {mismatches} bases ({variance_pct:.2f}% variant drift)")
+def check_structural_vulnerabilities(dna_seq: Seq) -> List[Dict[str, Any]]:
+    detected = []
+    s = str(dna_seq)
+    for motif, risk in CRITICAL_VULNERABILITIES.items():
+        pos = s.find(motif)
+        while pos != -1:
+            detected.append({"position": pos, "motif": motif, "risk": risk})
+            pos = s.find(motif, pos + 1)
+    return detected
 
-    print(f"\n[!] SLIDING WINDOW GC DROPS FOUND        : {len(gc_vulnerabilities)} regional dropping points (<40%)")
-    print(f"[!] STRUCTURAL mRNA DEGRADATION MOTIFS   : {len(structural_vulnerabilities)} severe risk sites found")
+# ========================== GUI ==========================
+class VaccineDiagnosticApp(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Multi-Vaccine Joint Optimization Tracker")
+        self.geometry("780x720")
+        self.configure(bg="#2c3e50")
 
-    if structural_vulnerabilities:
-        print("\n--- CRITICAL BREAKDOWN SITES IDENTIFIED ---")
-        for issue in structural_vulnerabilities[:4]: # Cap to avoid terminal overflow
-            print(f" -> Position {issue['position']}: Found '{issue['motif']}' - {issue['risk']}")
-        if len(structural_vulnerabilities) > 4:
-            print(f" ... and {len(structural_vulnerabilities) - 4} other hazardous motifs inside file.")
+        style = ttk.Style()
+        style.theme_use("clam")
+        style.configure("TLabel", background="#2c3e50", foreground="#ecf0f1", font=("Helvetica", 11))
+        style.configure("TButton", font=("Helvetica", 11, "bold"), background="#34495e", foreground="#ecf0f1")
+        style.map("TButton", background=[("active", "#1abc9c")])
 
-    # Save to disk
-    out_dir = Path(args.output)
-    out_dir.mkdir(parents=True, exist_ok=True)
-    report_file = out_dir / f"{args.vaccine}_joint_optimization_assessment.txt"
-    
-    with open(report_file, "w", encoding="utf-8") as f:
-        f.write(f"ADVANCED BIOCHEMICAL ANALYSIS REPORT - {VACCINES[args.vaccine]['name']}\n")
-        f.write("="*75 + "\n\n")
-        f.write(f"CAI Score: {cai_score}\n")
-        f.write(f"Overall GC Content: {overall_gc}%\n")
-        f.write(f"Translation Fitness Stability: {bottleneck_metrics['stability_score']}/100\n")
-        f.write(f"Total Base Skew: {mismatches} bases mismatching from baseline archetype reference\n\n")
-        f.write("--- DETECTED DEGRADATION MOTIFS ---\n")
-        for item in structural_vulnerabilities:
-            f.write(f"Base Position {item['position']}: Motif [{item['motif']}] -> {item['risk']}\n")
+        banner = tk.Label(self, text="JOINT OPTIMIZATION METRICS DIAGNOSTIC SUITE",
+                          bg="#1abc9c", fg="#ffffff", font=("Helvetica", 14, "bold"), pady=12)
+        banner.pack(fill=tk.X)
 
-    print(f"\n[✅] Full diagnostic report written to disk: {report_file}")
-    print("FACT == FACT.\n")
+        main = ttk.Frame(self, padding=15)
+        main.pack(fill=tk.BOTH, expand=True)
+
+        # Vaccine choice
+        ttk.Label(main, text="Target Vaccine:").grid(row=0, column=0, sticky=tk.W, pady=5)
+        self.vax_choice = ttk.Combobox(main, values=["Pfizer", "Moderna", "Janssen", "Novavax", "AstraZeneca"],
+                                       state="readonly", width=22)
+        self.vax_choice.set("Pfizer")
+        self.vax_choice.grid(row=0, column=1, sticky=tk.W, pady=5)
+        self.vax_choice.bind("<<ComboboxSelected>>", self.on_vaccine_change)
+
+        # Mode (only relevant for Moderna)
+        ttk.Label(main, text="Reference Mode:").grid(row=0, column=2, sticky=tk.W, padx=(20, 5))
+        self.mode_choice = ttk.Combobox(main, values=["real", "theoretical"], state="readonly", width=12)
+        self.mode_choice.set("real")
+        self.mode_choice.grid(row=0, column=3, sticky=tk.W)
+
+        # Input
+        ttk.Label(main, text="Sequence Input (paste or load file):").grid(row=1, column=0, columnspan=4, sticky=tk.W, pady=(15, 2))
+        self.dna_textbox = tk.Text(main, height=8, width=90, font=("Courier", 10), bg="#ecf0f1", fg="#2c3e50")
+        self.dna_textbox.grid(row=2, column=0, columnspan=4, pady=5)    
+        self.dna_textbox.insert(tk.END, DEMO_VULNERABLE_DNA)
+
+
+        # Buttons
+        btn_frame = ttk.Frame(main)
+        btn_frame.grid(row=3, column=0, columnspan=4, pady=10, sticky=tk.W)
+
+        ttk.Button(btn_frame, text="📂 Load File", command=self.load_file).pack(side=tk.LEFT, padx=5)
+        ttk.Button(btn_frame, text="⚡ Run Scan", command=self.execute_diagnostics).pack(side=tk.LEFT, padx=5)
+        ttk.Button(btn_frame, text="ℹ️ Residual DNA Info", command=self.show_residual).pack(side=tk.LEFT, padx=5)
+        ttk.Button(btn_frame, text="🔄 Clear", command=self.clear_fields).pack(side=tk.LEFT, padx=5)
+
+        # Report
+        ttk.Label(main, text="Diagnostic Report:").grid(row=4, column=0, columnspan=4, sticky=tk.W, pady=(15, 2))
+        self.report_textbox = tk.Text(main, height=16, width=90, font=("Courier", 10, "bold"),
+                                      bg="#34495e", fg="#1abc9c", relief=tk.SUNKEN)
+        self.report_textbox.grid(row=5, column=0, columnspan=4, pady=5)
+        self.report_textbox.insert(tk.END, "[*] Ready. Select vaccine and press Run Scan.")
+
+        self.on_vaccine_change()  # initial state
+
+    def on_vaccine_change(self, event=None):
+        vax = self.vax_choice.get().lower()
+        if vax == "moderna":
+            self.mode_choice.configure(state="readonly")
+        else:
+            self.mode_choice.set("real")
+            self.mode_choice.configure(state="disabled")
+
+    def load_file(self):
+        path = filedialog.askopenfilename(filetypes=[("Sequence files", "*.fasta *.fa *.txt *.fna")])
+        if path:
+            text = Path(path).read_text(encoding="utf-8")
+            clean = "".join(line.strip() for line in text.splitlines() if not line.startswith(">")).upper()
+            self.dna_textbox.delete("1.0", tk.END)
+            self.dna_textbox.insert(tk.END, clean)
+            messagebox.showinfo("Loaded", f"Sequence loaded from {Path(path).name}")
+
+    def clear_fields(self):
+        self.dna_textbox.delete("1.0", tk.END)
+        self.report_textbox.delete("1.0", tk.END)
+
+    def show_residual(self):
+        vax = self.vax_choice.get()
+        info = get_residual_info(vax)
+        msg = "\n".join(f"{k}: {v}" for k, v in info.items())
+        messagebox.showinfo(f"Residual DNA – {vax}", msg or "No residual DNA data available.")
+
+    def execute_diagnostics(self):
+        raw = self.dna_textbox.get("1.0", tk.END).strip().replace("\n", "").replace(" ", "").upper()
+        if not raw:
+            messagebox.showerror("Error", "Sequence input is empty.")
+            return
+
+        human_seq = Seq(raw)
+        vax = self.vax_choice.get()
+        mode = self.mode_choice.get()
+        ref_seq = get_vaccine_reference(vax, mode=mode)
+
+        cai = calculate_cai(human_seq)
+        gc_pct, gc_drops = analyze_gc_content(human_seq)
+        vulnerabilities = check_structural_vulnerabilities(human_seq)
+
+        min_len = min(len(ref_seq), len(human_seq))
+        mismatches = sum(1 for a, b in zip(ref_seq[:min_len], human_seq[:min_len])) + abs(len(ref_seq) - len(human_seq))
+        drift = (mismatches / len(ref_seq) * 100) if len(ref_seq) > 0 else 0.0
+
+        # Export
+        out_dir = Path("diagnostic_reports")
+        out_dir.mkdir(exist_ok=True)
+
+        data = {
+            "vaccine": vax,
+            "mode": mode,
+            "length_nt": len(human_seq),
+            "cai": cai,
+            "gc_percent": gc_pct,
+            "mismatches": mismatches,
+            "drift_percent": round(drift, 2),
+            "gc_drops": len(gc_drops),
+            "vulnerabilities": vulnerabilities
+        }
+
+        json_path = out_dir / f"{vax.lower()}_{mode}_report.json"
+        json_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+
+        csv_path = out_dir / f"{vax.lower()}_{mode}_metrics.csv"
+        with open(csv_path, "w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f)
+            w.writerow(["Metric", "Value"])
+            for k, v in data.items():
+                if k != "vulnerabilities":
+                    w.writerow([k, v])
+
+        # Report
+        self.report_textbox.delete("1.0", tk.END)
+        lines = [
+            "DIAGNOSTIC REPORT – FACT == FACT",
+            "=" * 70,
+            f"Vaccine          : {vax}  (mode: {mode})",
+            f"Input length     : {len(human_seq)} nt",
+            f"Reference length : {len(ref_seq)} nt",
+            "-" * 70,
+            f"CAI              : {cai:.4f}",
+            f"GC content       : {gc_pct}%",
+            f"Mismatches       : {mismatches}  ({drift:.2f}% drift)",
+            f"GC drop windows  : {len(gc_drops)}",
+            f"Risk motifs      : {len(vulnerabilities)}",
+        ]
+        if vulnerabilities:
+            lines.append("\n--- Detected motifs ---")
+            for item in vulnerabilities:
+                lines.append(f"  pos {item['position']}: {item['motif']} → {item['risk']}")
+
+        lines += [
+            "",
+            "=" * 70,
+            f"JSON export : {json_path}",
+            f"CSV export  : {csv_path}"
+        ]
+        self.report_textbox.insert(tk.END, "\n".join(lines))
 
 if __name__ == "__main__":
-    main()
+    app = VaccineDiagnosticApp()
+    app.mainloop()
